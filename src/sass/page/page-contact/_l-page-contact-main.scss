@@ -1,0 +1,10 @@
+@use "global" as *;
+
+.l-page-contact-main{
+  margin-top: rem(50);
+
+  @include mq("md") {
+    margin-top: rem(135);
+  }
+}
+

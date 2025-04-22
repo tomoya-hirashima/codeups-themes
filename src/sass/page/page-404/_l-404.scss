@@ -1,0 +1,13 @@
+@use "global" as *;
+
+.l-breadcrumbs.l-404{
+  margin-top: 0;
+  background-color: $green;
+  position: relative;
+  z-index: 10;
+}
+
+//WP化
+.l-404 .breadcrumbs__items li:not(:last-child):after {
+  background-image: url(../images/common/breadcrumb-arrow-white.svg);
+}

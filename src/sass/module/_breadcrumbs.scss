@@ -1,0 +1,81 @@
+@use "global" as *;
+
+// .breadcrumbs {
+// }
+
+.breadcrumbs__items {
+  position: relative;
+  display: flex;
+  gap: rem(8);
+  font-size: rem(14);
+  font-weight: $regular;
+  font-family: "Noto Sans JP";
+  color: $black;
+}
+
+.breadcrumbs__items.breadcrumbs__items--white {
+  color: $white;
+}
+
+.breadcrumbs__items::before {
+  position: absolute;
+  content: "";
+  top: rem(48);
+  left: calc(50% - min(46vw, 57%));
+  display: inline-block;
+  width: rem(120);
+  height: rem(55);
+  background-image: url(../images/common/sub-campaign-backimg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+
+  @include mq("md") {
+    top: rem(100);
+    width: rem(301);
+    height: rem(138);
+  }
+}
+
+.breadcrumbs__items.breadcrumbs__items--imgnon:before {
+  @include mq("md") {
+    display: none;
+  }
+}
+
+.breadcrumbs__item a {
+  transition: 0.3s opacity;
+}
+
+.breadcrumbs__item a:hover {
+  opacity: 0.5;
+}
+
+.breadcrumbs__item:not(:last-child):after {
+  content: "";
+  display: inline-block;
+  width: rem(5);
+  height: rem(10);
+  background-image: url(../images/common/breadcrumb-arrow.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-left: rem(5);
+}
+
+.breadcrumbs__item.breadcrumbs__item--white:not(:last-child):after {
+  background-image: url(../images/common/breadcrumb-arrow-white.svg);
+}
+
+
+// WP化
+.breadcrumbs__items .home {
+  display: none;
+}
+
+.breadcrumbs__items a[aria-current="page"] {
+  pointer-events: none; /* クリックできなくする */
+  text-decoration: none; /* 下線も消す（必要なら） */
+  color: inherit; /* 文字色を普通のテキストと同じにする */
+  cursor: default; /* マウスポインタを通常矢印にする */
+}

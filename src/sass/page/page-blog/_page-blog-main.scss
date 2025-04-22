@@ -1,0 +1,43 @@
+@use "global" as *;
+
+.page-blog-main {
+}
+
+.page-blog-main__container {
+  display: flex;
+  flex-direction: column;
+  gap: rem(80);
+
+  @include mq("md") {
+    flex-direction: row;
+  }
+}
+
+.page-blog-main__contents {
+  flex: 1;
+}
+
+.page-blog-main__sidebar {
+  width: 85.21%;
+  margin: auto;
+
+  @include mq("md") {
+    width: rem(294);
+  }
+}
+
+.blog-cards.blog-cards--col2 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: rem(40);
+
+  @include mq("md") {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: rem(40);
+    row-gap: rem(80);
+  }
+}
+
+.page-blog-main__pagination {
+  margin-top: rem(80);
+}

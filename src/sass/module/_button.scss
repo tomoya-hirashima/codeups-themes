@@ -1,0 +1,130 @@
+@use "global" as *;
+
+
+.button {
+  position: relative;
+  display: inline-block;
+  width: rem(202);
+  border: rem(1) solid $green;
+  background-color: $green;
+  color: $white;
+  transition: 0.3s ease;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: rem(4);
+  left: rem(4);
+  display: inline-block;
+  width: rem(202);
+  height: rem(54);
+  padding: 0 rem(4) rem(4) 0;
+  border: rem(1) solid $green;
+  z-index: -1;
+}
+
+.button::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $white;
+transform: scale(0, 1);
+transform-origin: left top;
+transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1);
+z-index: -1;
+}
+
+.button:hover {
+  background-color: $white;
+  color: $green;
+}
+
+.button:hover::after {
+  transform: scale(1, 1);
+}
+
+.button span {
+  display: inline-block;
+  width: 100%;
+  padding:rem(16) rem(40);
+  font-size: rem(14);
+  line-height: 1.571;
+  text-align: left;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.button span::first-letter {
+  text-transform: capitalize;
+}
+
+.button span::before,
+.button span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: rem(35);
+  height: rem(1);
+  background-color: $white;
+  transition: 0.3s background-color;
+}
+
+.button span::before {
+  width: 2.5rem;
+  transform: translateY(-50%);
+}
+
+.button span::after {
+  width: rem(9.2);
+  transform: translateY(-50%) rotate(45deg);
+  transform-origin: right center;
+}
+
+.button span:hover::before,
+.button span:hover::after {
+  background-color: $green;
+}
+
+
+
+// page-contact button
+.button.button-send  span{
+  padding: rem(16) rem(56);
+}
+
+
+// 色変更（白） 404ページ
+.button.button-white{
+  background-color: $white;
+  color:$green;
+  border: rem(1) solid $white;
+}
+
+
+.button.button-white::before {
+  border: rem(1) solid $white;
+}
+
+.button.button-white::after{
+  background: $green;
+}
+
+.button.button-white:hover {
+  background-color: $green;
+  color: $white;
+}
+
+.button.button-white span::before,
+.button.button-white span::after {
+  background-color: $green;
+}
+
+.button.button-white span:hover::before,
+.button.button-white span:hover::after {
+  background-color: $white;
+}

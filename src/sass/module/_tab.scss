@@ -1,0 +1,24 @@
+@use "global" as *;
+
+.tab {
+  border: rem(1) solid $green;
+  color: $green;
+  display: inline-block;
+  font-family: "Noto Sans JP";
+  font-size: rem(14);
+  line-height: 1.571;
+  text-align: center;
+  padding: rem(5) 0;
+  background-color: $white;
+  transition: 0.3s background-color, 0.3s color;
+}
+
+.tab:hover {
+  background-color: $green;
+  color: $white;
+}
+
+.tab.is-active {
+  background-color: $green;
+  color: #fff;
+}

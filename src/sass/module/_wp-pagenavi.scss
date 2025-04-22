@@ -1,0 +1,125 @@
+@use "global" as *;
+
+.wp-pagenavi {
+  display: flex;
+  justify-content: center;
+  gap: 0 rem(12);
+  list-style-type: none;
+}
+
+.previouspostslink,
+.nextpostslink {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(38);
+  height: rem(38);
+  border: 1px solid $green;
+  transition: 0.3s background-color, 0.3s color;
+}
+
+// 前へ戻る
+.previouspostslink{
+  position: relative;
+  margin-right: rem(28);
+}
+
+.previouspostslink::before,
+.previouspostslink::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  transform: translateX(-50%);
+  width: rem(11.3);
+  height: rem(1);
+  border-radius: 9999px;
+  background-color: $green;
+  transform-origin: 0.5px 50%;
+}
+
+.previouspostslink:hover::before,
+.previouspostslink:hover::after {
+  background-color: $white;
+}
+
+.previouspostslink::before {
+  transform: rotate(46.95deg);
+}
+
+.previouspostslink::after {
+  transform: rotate(-46.95deg);
+}
+
+// 次へ進む
+.nextpostslink {
+  position: relative;
+  margin-left: rem(28);
+}
+
+.nextpostslink::before,
+.nextpostslink::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  width: rem(11.3);
+  height: rem(1);
+  border-radius: 9999px;
+  background-color: $green;
+  transform-origin: calc(100% - 0.5px) 50%;
+}
+
+.nextpostslink:hover::before,
+.nextpostslink:hover::after {
+  background-color: $white;
+}
+
+.nextpostslink::before {
+  transform: rotate(46.95deg);
+}
+
+.nextpostslink::after {
+  transform: rotate(-46.95deg);
+}
+
+.wp-pagenavi .page {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(38);
+  height: rem(38);
+  border: 1px solid $green;
+  color: $green;
+  font-size: rem(16);
+  font-weight: $bold;
+  font-family: $third-font-family;
+  transition: 0.3s background-color, 0.3s color;
+}
+.wp-pagenavi .page:hover {
+  background-color: $green;
+  color: $white;
+}
+
+.wp-pagenavi .current {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(38);
+  height: rem(38);
+  border: 1px solid $green;
+  background-color: $green;
+  color: #fff;
+  pointer-events: none;
+}
+
+.wp-pagenavi .previouspostslink:hover,
+.wp-pagenavi .nextpostslink:hover,
+.wp-pagenavi .first:hover,
+.wp-pagenavi .last:hover {
+  background-color: $green;
+  color: #fff;
+}

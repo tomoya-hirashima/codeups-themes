@@ -1,0 +1,102 @@
+@use "global" as *;
+
+.past-posts{
+  font-size:rem(24);
+  font-weight:$regular;
+  font-family:"Noto Sans JP", sans-serif;
+  color:$green;
+}
+
+.past-posts__year:not(:first-child){
+margin-top: rem(4);
+
+}
+
+.past-posts__year-label {
+  position: relative;
+  padding-left: rem(32);
+  cursor: pointer;
+}
+
+.past-posts__year-label::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: rem(8);
+  transform: translateY(-50%);
+  width: rem(18);
+  height: rem(18);
+  aspect-ratio: cos(30deg);
+  clip-path: polygon(0 0,100% 50%,0 100%);
+  background: $green;
+  transition: transform 0.3s;
+}
+
+.past-posts__year-label.is-open::before {
+  top: 33%;
+  left: rem(3);
+  transform:rotate(90deg);
+}
+
+
+.past-posts__month-list {
+  margin-top: rem(3);
+  margin-left: rem(24);
+  display: none;
+
+  @include mq("md") {
+    margin-top: rem(9);
+  }
+}
+
+.past-posts__month-list.is-open {
+  display: block;
+}
+
+.past-posts__month {
+
+}
+
+.past-posts__month::before {
+}
+
+.past-posts__month:not(:first-child){
+  margin-top: rem(3);
+
+  @include mq("md") {
+  margin-top: 0;
+  }
+}
+
+
+.past-posts__link {
+}
+
+.past-posts__link span{
+  position: relative;
+  padding-left: rem(32)
+}
+
+.past-posts__link span::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: rem(8);
+  transform: translateY(-50%);
+  width: rem(18);
+  height: rem(18);
+  aspect-ratio: cos(30deg);
+  clip-path: polygon(0 0,100% 50%,0 100%);
+  background: $green;
+  transition: transform 0.3s;
+}
+
+
+
+/* HTML: <div class="triangle"></div> */
+.triangle {
+  height: rem(18);
+  aspect-ratio: cos(30deg);
+  clip-path: polygon(0 0,100% 50%,0 100%);
+  background: $green;
+}

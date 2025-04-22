@@ -1,0 +1,18 @@
+@use "global" as *;
+
+.page-campaign-main {
+}
+
+.page-campaign-main__container {
+  position: relative;
+}
+
+
+.page-campaign-main__tab-contents {
+  margin-top: rem(40);
+}
+
+
+.page-campaign-main__pagination {
+  margin-top: rem(80);
+}

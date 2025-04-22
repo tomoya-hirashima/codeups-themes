@@ -1,0 +1,76 @@
+@use "global" as *;
+
+.info-tab {
+  display: inline-block;
+  padding: rem(10) rem(16);
+  background-color: $skyblue;
+  box-shadow: rem(2) rem(2) rem(4) 0 rgba(0, 0, 0, 0.25);
+  font-size: rem(14);
+  font-weight: $regular;
+  font-family: "Noto Sans JP", sans-serif;
+  color: $green;
+  text-align: center;
+  transition: 0.3s background-color, 0.3s color;
+
+  @include mq("md") {
+    padding: rem(26) 0;
+    font-size: rem(24);
+  }
+}
+
+.info-tab:hover {
+  background-color: $green;
+  color: $white;
+}
+
+.info-tab.is-active {
+  background-color: $green;
+  color: $white;
+}
+
+// あしらい
+.info-tab span {
+  @include mq("md") {
+    position: relative;
+    padding-left: rem(72);
+  }
+}
+
+.info-tab span::before {
+  display: none;
+
+  @include mq("md") {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    top: rem(-16);
+    left: 0;
+    width: rem(64);
+    height: rem(64);
+    background-size: contain;
+  }
+}
+
+.info-tab:nth-child(1) span::before {
+  mask-image: url(../images/common/info-tab-whale.png);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  background: currentColor;
+}
+
+.info-tab:nth-child(2) span::before {
+  mask-image: url(../images/common/info-tab-shark.png);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  background: currentColor;
+}
+
+.info-tab:nth-child(3) span::before {
+  mask-image: url(../images/common/info-tab-fish.png);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  background: currentColor;
+}

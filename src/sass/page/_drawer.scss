@@ -1,0 +1,19 @@
+@use "global" as *;
+
+.drawer {
+
+}
+
+.drawer__inner {
+  padding-top: rem(101);
+  padding-bottom: rem(101);
+}
+
+.drawer__wrapper{
+  max-width: rem(500);
+  margin-inline: auto;
+
+  @include mq("md") {
+    max-width: rem(1130);
+  }
+}

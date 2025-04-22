@@ -1,0 +1,64 @@
+@use "global" as *;
+
+.section-heading {
+  text-align: center;
+}
+
+.section-heading__main {
+  font-size: rem(32);
+  font-weight: $regular;
+  line-height: 1.25;
+  color: $black;
+
+  @include mq("md") {
+    font-size: rem(40);
+    line-height: 1;
+  }
+}
+
+.section-heading__main::first-letter {
+  color: $green;
+  text-transform: capitalize;
+}
+
+.section-heading__sub {
+  margin-top: 0;
+  font-size: rem(12);
+  font-weight: $regular;
+  line-height: 1.5;
+  color: $green;
+  font-family: "Noto Sans JP";
+
+  @include mq("md") {
+    margin-top: rem(8);
+  }
+}
+
+// コンタクト
+.section-heading__main.section-heading__main--big {
+  font-size: rem(80);
+  line-height: 1;
+}
+
+.contact__heading .section-heading__sub {
+  @include mq("md") {
+    margin-top: 0;
+  }
+}
+
+// ブログタイトル
+.section-heading__main.section-heading__main--color {
+  @include mq("md") {
+    color: $white;
+  }
+}
+
+.section-heading__main.section-heading__main--color::first-letter {
+  @include mq("md") {
+    color: $skyblue;
+  }
+}
+
+.section-heading__sub.section-heading__sub--white {
+  color: $white;
+}

@@ -1,0 +1,77 @@
+@use "global" as *;
+
+.accordion-box {
+}
+
+.accordion-box__question {
+  position: relative;
+  background-color: $green;
+  padding: rem(16) rem(48) rem(16) rem(16);
+  font-family: "Noto Sans JP", sans-serif;
+  cursor: pointer;
+
+  @include mq("md") {
+    padding: rem(25) rem(72) rem(25) rem(40);
+  }
+}
+
+.accordion-box__question::before,
+.accordion-box__question::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  right: rem(16);
+  width: rem(28);
+  height: rem(1);
+  background-color: $white;
+  transform: translateY(-50%);
+  transition: 0.3s transform, 0.3s opacity;
+
+  @include mq("md") {
+    right: rem(40);
+    width: rem(32);
+  }
+}
+
+.accordion-box__question::before {
+  transform: rotate(90deg);
+}
+
+.accordion-box__question.is-open::before {
+  transform: rotate(180deg);
+}
+
+.accordion-box__question.is-open::after {
+  opacity: 0;
+}
+
+.accordion-box__question-text {
+  font-size: rem(16);
+  font-weight: $regular;
+  font-family: "Noto Sans JP", sans-serif;
+  color: $white;
+
+  @include mq("md") {
+    font-size: rem(20);
+  }
+}
+
+.accordion-box__answer {
+  display: none;
+  border: rem(1) solid $green;
+  padding: rem(24) rem(16);
+
+
+  @include mq("md") {
+    margin-top: rem(16);
+    padding: rem(40);
+  }
+}
+
+.accordion-box__answer-text {
+  font-size: rem(16);
+  font-weight: $regular;
+  font-family: "Noto Sans JP", sans-serif;
+  color: $black;
+  line-height: 1.41;
+}
