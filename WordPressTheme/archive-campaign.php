@@ -29,7 +29,7 @@
           </a>
           <!-- 各カテゴリのリンク -->
           <?php foreach ($terms as $term) : ?>
-          <a class="tabs__item tab" href="<?php echo esc_url(get_term_link($term)); ?>">
+          <a class="tabs__item tab" href="#<?php echo esc_url(get_term_link($term)); ?>">
             <?php echo esc_html($term->name); ?>
           </a>
 
@@ -45,7 +45,8 @@
               <?php while (have_posts()): the_post(); ?>
               <?php $show = get_field('show');
                   if ($show): ?>
-              <div class="page-campaign-cards__item campaign-card campaign-card--detailed">
+              <div class="page-campaign-cards__item campaign-card campaign-card--detailed"
+                id="campaign-<?php the_ID(); ?>">
                 <figure class="campaign-card__img">
                   <?php if (has_post_thumbnail()): ?>
                   <?php the_post_thumbnail('full'); ?>

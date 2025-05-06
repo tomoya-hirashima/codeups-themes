@@ -695,6 +695,12 @@ a {
 	margin-top: 3.25rem;
 }
 
+/* ページ内リンクのズレ防止 */
+
+[id^=campaign-] {
+	scroll-margin-top: 5.625rem;
+}
+
 .page-campaign-hero {
 	background-image: url(../images/common/sub-campaign-hero-sp.jpg);
 	background-position: center;
@@ -796,6 +802,50 @@ a {
 	margin-top: 0.8125rem;
 }
 
+.l-page-others-main {
+	margin-top: 3.25rem;
+}
+
+.page-others-hero {
+	background-image: url(../images/common/sub-others-hero-sp.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.page-others-main__title {
+	color: #0D2936;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.page-others-main__items {
+	color: #0D2936;
+	counter-reset: section;
+	font-family: "Noto Sans JP", sans-serif;
+	font-weight: 400;
+	line-height: 2;
+	margin-top: 2.5rem;
+}
+
+.wp-block-spacer {
+	height: 2rem;
+}
+
+.page-others-main__items li {
+	counter-increment: section;
+	padding-left: 1.5em;
+	position: relative;
+}
+
+.page-others-main__items li::before {
+	content: counter(section) ".";
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
 .l-page-price-main {
 	margin-top: 3.25rem;
 }
@@ -815,13 +865,6 @@ a {
 	margin-top: 3.25rem;
 }
 
-.page-others-hero {
-	background-image: url(../images/common/sub-others-hero-sp.jpg);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
 .page-privacy-main__title {
 	color: #0D2936;
 	font-family: "Noto Sans JP", sans-serif;
@@ -830,15 +873,12 @@ a {
 }
 
 .page-privacy-main__items {
-	margin-top: 2.5rem;
-}
-
-.page-privacy-main__item {
 	color: #0D2936;
+	counter-reset: section;
 	font-family: "Noto Sans JP", sans-serif;
-	font-size: 1rem;
 	font-weight: 400;
 	line-height: 2;
+	margin-top: 2.5rem;
 }
 
 .page-privacy-main__item:not(:first-child) {
@@ -849,6 +889,23 @@ a {
 	font-family: "Noto Sans JP", sans-serif;
 	list-style: auto;
 	padding-left: 1.5em;
+}
+
+.wp-block-spacer {
+	height: 2rem;
+}
+
+.page-privacy-main__items li {
+	counter-increment: section;
+	padding-left: 1.5em;
+	position: relative;
+}
+
+.page-privacy-main__items li::before {
+	content: counter(section) ".";
+	left: 0;
+	position: absolute;
+	top: 0;
 }
 
 .l-page-sitemap-main {
@@ -1596,6 +1653,7 @@ footer {
 	font-family: "Lato", sans-serif;
 	font-size: 2.5rem;
 	font-weight: 400;
+	white-space: nowrap;
 }
 
 .img-animation {
@@ -2429,17 +2487,6 @@ body {
 	padding-bottom: 1.5rem;
 }
 
-.form-wrapper::after {
-	background-image: url(../images/common/underline.svg);
-	background-repeat: repeat;
-	bottom: 0;
-	content: "";
-	height: 0.0625rem;
-	left: 0;
-	position: absolute;
-	width: 100%;
-}
-
 .form-wrapper__item {
 	color: #0D2936;
 	font-family: "Noto Sans JP", sans-serif;
@@ -2471,12 +2518,21 @@ body {
 }
 
 .form-wrapper__body {
-	border: 0.0625rem solid #408F95;
 	margin-top: 0.75rem;
 	width: 100%;
 }
 
-.form-wrapper__body.form-wrapper__body--error {
+.form-wrapper__body input,
+.form-wrapper__body textarea,
+.form-wrapper__body select {
+	background: transparent;
+	border: 0.0625rem solid #408F95;
+}
+
+.form-wrapper__body input.wpcf7-not-valid,
+.form-wrapper__body textarea.wpcf7-not-valid,
+.form-wrapper__body select.wpcf7-not-valid,
+.wpcf7-checkbox.wpcf7-not-valid {
 	background-color: rgba(201, 72, 0, 0.2);
 	border: 0.0625rem solid #C94800;
 }
@@ -2514,6 +2570,10 @@ body {
 	scrollbar-width: none;
 }
 
+.wpcf7-form-control.wpcf7-textarea {
+	height: 100%;
+}
+
 /*スクロールバー非表示（Chrome・Safari・Edge）*/
 
 .form-wrapper__body::-webkit-scrollbar {
@@ -2548,10 +2608,6 @@ body {
 .form-wrapper__inquiry {
 	padding-left: 1.375rem;
 	position: relative;
-}
-
-.form-wrapper__inquiry input {
-	display: none;
 }
 
 .form-wrapper__inquiry::before {
@@ -2607,6 +2663,116 @@ body {
 	padding: 0.5rem;
 	resize: both;
 	width: 100%;
+}
+
+.wpcf7-form-control-wrap {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.wpcf7-form-control.wpcf7-acceptance {
+	display: block;
+	width: 100%;
+}
+
+.wpcf7-acceptance .wpcf7-list-item {
+	text-align: center;
+	width: 100%;
+}
+
+.wpcf7-checkbox .wpcf7-list-item {
+	display: block;
+}
+
+.wpcf7-checkbox .wpcf7-list-item {
+	padding-left: 1.375rem;
+	position: relative;
+}
+
+.wpcf7-checkbox .wpcf7-list-item::before {
+	border: 0.0625rem solid #408F95;
+	content: "";
+	height: 0.875rem;
+	left: 0;
+	position: absolute;
+	top: 0.25rem;
+	width: 0.875rem;
+}
+
+.wpcf7-checkbox .wpcf7-list-item::after {
+	border-bottom: 0.125rem solid #C94800;
+	border-left: 0.125rem solid #C94800;
+	content: "";
+	display: inline-block;
+	height: 0.3125rem;
+	left: 0.1875rem;
+	opacity: 0;
+	position: absolute;
+	top: 0.4375rem;
+	transform: rotate(-45deg);
+	width: 0.5625rem;
+}
+
+.wpcf7-checkbox .wpcf7-list-item:has(input[type=checkbox]:checked)::after {
+	opacity: 1;
+}
+
+.wpcf7-form-control.wpcf7-select {
+	color: #0D2936;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.form-wrapper__body-5th p {
+	height: 100%;
+	width: 100%;
+}
+
+.wpcf7-form-control-wrap {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.wpcf7-form-control.wpcf7-select {
+	color: #0D2936;
+	display: block;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.75rem;
+	font-weight: 400;
+	height: 100%;
+	padding: 0.6875rem 0.5rem;
+	width: 100%;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output {
+	border: none;
+	color: #C94800;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.875rem;
+	font-weight: 400;
+	margin: 0;
+	padding-bottom: 2.5rem;
+	padding-top: 0.9375rem;
+	text-align: center;
+}
+
+input.wpcf7-not-valid::-moz-placeholder,
+textarea.wpcf7-not-valid::-moz-placeholder {
+	color: #ffffff; /* プレースホルダーを白色に */
+	opacity: 1;
+}
+
+input.wpcf7-not-valid::placeholder,
+textarea.wpcf7-not-valid::placeholder {
+	color: #ffffff; /* プレースホルダーを白色に */
+	opacity: 1;
+}
+
+.wpcf7-not-valid-tip {
+	display: none;
 }
 
 .form {
@@ -2672,6 +2838,116 @@ body {
 .form__button {
 	margin-top: 1.5rem;
 	text-align: center;
+}
+
+.wpcf7-form-control {
+	color: #0D2936;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+	padding: 0.40625rem 0.5rem 0.40625rem 1rem;
+	width: 100%;
+}
+
+.wpcf7-text::-moz-placeholder {
+	color: #DDF0F1;
+}
+
+.wpcf7-text::placeholder {
+	color: #DDF0F1;
+}
+
+.wpcf7-checkbox {
+	grid-row-gap: 0.25rem;
+	display: grid;
+	row-gap: 0.25rem;
+}
+
+.wpcf7-acceptance .wpcf7-list-item-label {
+	color: #0D2936;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.875rem;
+	line-height: 1.571;
+	padding-left: 1.875rem;
+	position: relative;
+}
+
+.wpcf7-acceptance .wpcf7-list-item-label::before {
+	border: 0.0625rem solid #408f95;
+	content: "";
+	height: 1.375rem;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 1.375rem;
+}
+
+.wpcf7-acceptance .wpcf7-list-item-label::after {
+	border-bottom: 0.125rem solid #C94800;
+	border-left: 0.125rem solid #C94800;
+	content: "";
+	display: inline-block;
+	height: 0.5rem;
+	left: 0.25rem;
+	opacity: 0;
+	position: absolute;
+	top: 0.3125rem;
+	transform: rotate(-45deg);
+	width: 0.875rem;
+}
+
+.form__private input[type=checkbox]:checked + span::after {
+	opacity: 1;
+}
+
+.button.button-send {
+	position: relative;
+}
+
+.button.button-send::before,
+.button.button-send::after {
+	background-color: #fff;
+	content: "";
+	height: 0.0625rem;
+	position: absolute;
+	right: 2.1875rem;
+	top: 50%;
+	transition: 0.3s background-color;
+	z-index: 1;
+}
+
+.button.button-send::before {
+	transform: translateY(-50%);
+	width: 2.5rem;
+}
+
+.button.button-send::after {
+	transform: translateY(-50%) rotate(45deg);
+	transform-origin: right center;
+	width: 0.575rem;
+}
+
+.wpcf7-submit {
+	background-color: #408F95;
+	color: #fff;
+	display: inline-block;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.875rem;
+	line-height: 1.571;
+	padding: 1rem 3.5rem;
+	text-align: left;
+	text-transform: capitalize;
+	transition: 0.3s ease;
+	width: 100%;
+}
+
+.wpcf7-submit:hover {
+	background-color: #fff;
+	color: #408F95;
+}
+
+.form__button .wpcf7-spinner {
+	display: none;
 }
 
 .accordion-box__question {
@@ -3069,6 +3345,7 @@ body {
 .sidebar-blog-card__img img {
 	-o-object-fit: cover;
 	aspect-ratio: 121/90;
+	height: 100%;
 	object-fit: cover;
 	width: 100%;
 }
@@ -3124,6 +3401,7 @@ body {
 .sidebar-campaign-card__img img {
 	-o-object-fit: cover;
 	aspect-ratio: 294/188;
+	height: 100%;
 	object-fit: cover;
 	width: 100%;
 }
@@ -3253,6 +3531,7 @@ body {
 .sidebar-voice-card__img img {
 	-o-object-fit: cover;
 	aspect-ratio: 294/218;
+	height: 100%;
 	object-fit: cover;
 	width: 100%;
 }
@@ -3780,6 +4059,26 @@ html {
 	margin-top: 1.5rem;
 }
 
+.l-page-others-main {
+	margin-top: 11rem;
+}
+
+.page-others-hero {
+	background-image: url(../images/common/sub-others-hero.jpg);
+}
+
+.page-others-main__inner.inner {
+	max-width: 53.125rem;
+}
+
+.page-others-main__title {
+	font-size: 2rem;
+}
+
+.page-others-main__items {
+	margin-top: 2.125rem;
+}
+
 .l-page-price-main {
 	margin-top: 9.8125rem;
 }
@@ -3790,10 +4089,6 @@ html {
 
 .l-page-privacy-main {
 	margin-top: 11rem;
-}
-
-.page-others-hero {
-	background-image: url(../images/common/sub-others-hero.jpg);
 }
 
 .page-privacy-main__inner.inner {
@@ -4343,6 +4638,10 @@ footer {
 	padding: 0 1.25rem 0 0.5rem;
 }
 
+.wpcf7-form-control.wpcf7-select {
+	padding: 0 1.25rem 0 0.5rem;
+}
+
 .form__wrapper:not(:first-child) {
 	margin-top: 2.5rem;
 }
@@ -4357,6 +4656,10 @@ footer {
 
 .form__button {
 	margin-top: 2.5rem;
+}
+
+.wpcf7-acceptance .wpcf7-list-item-label {
+	padding-left: 2.375rem;
 }
 
 .accordion-box__question {

@@ -13,56 +13,56 @@
   <header class="header js-header" id="#js-header">
     <div class="header__inner">
       <h1 class="header__logo">
-        <a href="index.html">
+        <a href="<?php echo esc_url(home_url('/')); ?>">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/header-logo-img.svg" alt="CodeUps" />
         </a>
       </h1>
       <nav class="header__nav nav-bar">
         <ul class="nav-bar__items">
           <li class="nav-bar__item">
-            <a href="./page-campaign.html">
+            <a href="<?php echo esc_url(home_url('/campaign/')); ?>">
               <p class="nav-bar__item-main">Campaign</p>
               <p class="nav-bar__item-sub">キャンペーン</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-about.html">
+            <a href="<?php echo esc_url(home_url('/about/')); ?>">
               <p class="nav-bar__item-main">About&nbsp;us</p>
               <p class="nav-bar__item-sub">私たちについて</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-info.html">
+            <a href="<?php echo esc_url(home_url('/info/')); ?>">
               <p class="nav-bar__item-main">Information</p>
               <p class="nav-bar__item-sub">ダイビング情報</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-blog.html">
+            <a href="<?php echo esc_url(home_url('/blog/')); ?>">
               <p class="nav-bar__item-main">Blog</p>
               <p class="nav-bar__item-sub">ブログ</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-voice.html">
+            <a href="<?php echo esc_url(home_url('/voice/')); ?>">
               <p class="nav-bar__item-main">Voice</p>
               <p class="nav-bar__item-sub">お客様の声</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-price.html">
+            <a href="<?php echo esc_url(home_url('/price/')); ?>">
               <p class="nav-bar__item-main">Price</p>
               <p class="nav-bar__item-sub">料金一覧</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-faq.html">
+            <a href="<?php echo esc_url(home_url('/faq/')); ?>">
               <p class="nav-bar__item-main nav-bar__item-main--big">faq</p>
               <p class="nav-bar__item-sub">よくある質問</p>
             </a>
           </li>
           <li class="nav-bar__item">
-            <a href="./page-contact.html">
+            <a href="<?php echo esc_url(home_url('/contact/')); ?>">
               <p class="nav-bar__item-main">Contact</p>
               <p class="nav-bar__item-sub">お問い合わせ</p>
             </a>

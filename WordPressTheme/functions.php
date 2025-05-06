@@ -132,3 +132,65 @@ function custom_bcn_display_list_items($html) {
   return $html;
 }
 add_filter('bcn_display_list_items', 'custom_bcn_display_list_items', 10);
+
+// Uncategorizedを非表示
+function bcn_remove_uncategorized($trail) {
+  if (!is_single()) return $trail; // 投稿ページ以外は処理しない
+
+  foreach ($trail->breadcrumbs as $key => $crumb) {
+    // 未分類カテゴリを除外（スラッグが "uncategorized" のとき）
+    if (isset($crumb->taxonomy) && $crumb->taxonomy === 'category' && $crumb->term->slug === 'uncategorized') {
+      unset($trail->breadcrumbs[$key]);
+    }
+  }
+
+  // 配列のキーを再振り直し
+  $trail->breadcrumbs = array_values($trail->breadcrumbs);
+
+  return $trail;
+}
+add_filter('bcn_after_fill', 'bcn_remove_uncategorized');
+
+
+
+// 記事を開いたときにviewsを1増やす
+function set_post_views($postID) {
+  $count_key = 'views'; // フィールド名を指定
+  $count = get_post_meta($postID, $count_key, true);
+
+  if($count == ''){
+    $count = 0;
+    delete_post_meta($postID, $count_key); // 念のため初期化
+    add_post_meta($postID, $count_key, '0');
+  } else {
+    $count++;
+    update_post_meta($postID, $count_key, $count);
+  }
+}
+
+// WordPressの既存のメタ情報（アイキャッチとか）にviewを表示させないようにする（オプション）
+function track_post_views($post_id) {
+  if ( !is_single() ) return;
+  if ( empty ( $post_id ) ) {
+    global $post;
+    $post_id = $post->ID;
+  }
+  set_post_views($post_id);
+}
+add_action('wp_head', 'track_post_views');
+
+// 全てのContact Form 7の出力に対してwpautopを無効にする
+add_filter('wpcf7_autop_or_not', '__return_false');
+
+
+// 独自ログインURL（例: /my-login）でログインページを表示
+function custom_login_url() {
+  $request_uri = $_SERVER['REQUEST_URI'];
+
+  // /my-login にアクセスされた場合、wp-login.php を読み込む
+  if (strpos($request_uri, '/my-login') !== false) {
+    require_once ABSPATH . 'wp-login.php';
+    exit;
+  }
+}
+add_action('init', 'custom_login_url');

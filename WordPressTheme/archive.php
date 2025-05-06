@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
 <main>
+
   <section id="page-blog-hero" class="page-blog-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -16,7 +17,7 @@
       <div class="page-blog-main__container">
         <div class="page-blog-main__contents">
           <ul class="page-blog-main__items blog-cards blog-cards--col2">
-            <!-- 記事のループ処理開始 -->
+
             <?php if (have_posts()): ?>
             <?php while (have_posts()): the_post(); ?>
             <li class="blog-cards__item blog-card">
@@ -47,9 +48,7 @@
             <?php else: ?>
             <p>まだ記事がありません</p>
             <?php endif; ?>
-            <!-- 記事のループ処理終了 -->
           </ul>
-
           <!-- ページネーション -->
           <div class="l-pagenavi">
             <?php if (function_exists('wp_pagenavi')): ?>
@@ -63,7 +62,6 @@
       </div>
     </div>
   </div>
-
 </main>
 
 <?php get_footer(); ?>

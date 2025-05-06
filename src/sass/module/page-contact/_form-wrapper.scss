@@ -12,16 +12,6 @@
   }
 }
 
-.form-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: rem(1);
-  background-image: url(../images/common/underline.svg);
-  background-repeat: repeat;
-}
 
 .form-wrapper__item {
   width: 100%;
@@ -59,7 +49,6 @@
 
 .form-wrapper__body {
   width: 100%;
-  border: rem(1) solid $green;
   margin-top: rem(12);
   @include mq("md") {
     width: 68.57%;
@@ -67,7 +56,17 @@
   }
 }
 
-.form-wrapper__body.form-wrapper__body--error {
+.form-wrapper__body input,
+.form-wrapper__body textarea,
+.form-wrapper__body select{
+  border: rem(1) solid $green;
+  background: transparent;
+}
+
+.form-wrapper__body input.wpcf7-not-valid ,
+.form-wrapper__body textarea.wpcf7-not-valid,
+.form-wrapper__body select.wpcf7-not-valid,
+.wpcf7-checkbox.wpcf7-not-valid{
   border: rem(1) solid $orange;
   background-color: rgba($color: $orange, $alpha: 0.2);
 }
@@ -113,6 +112,10 @@
   scrollbar-width: none;
 }
 
+.wpcf7-form-control.wpcf7-textarea{
+  height: 100%;
+}
+
 /*スクロールバー非表示（Chrome・Safari・Edge）*/
 .form-wrapper__body::-webkit-scrollbar {
   display: none;
@@ -141,7 +144,7 @@
 }
 
 .form-wrapper__inquiry input {
-  display: none;
+  // display: none;
 }
 
 .form-wrapper__inquiry::before {
@@ -191,6 +194,8 @@
   }
 }
 
+
+
 .form-wrapper__textarea {
   width: 100%;
   padding: rem(8);
@@ -200,4 +205,119 @@
   font-family: "Noto Sans JP", sans-serif;
   color: $black;
   resize: both;
+}
+
+
+// WP化
+.wpcf7-form-control-wrap{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wpcf7-form-control.wpcf7-acceptance{
+  display: block;
+  width: 100%;
+}
+
+.wpcf7-acceptance .wpcf7-list-item{
+  width: 100%;
+  text-align: center;
+}
+
+.wpcf7-checkbox .wpcf7-list-item{
+  display: block;
+}
+
+.wpcf7-checkbox .wpcf7-list-item {
+  position: relative;
+  padding-left: rem(22);
+}
+
+.wpcf7-checkbox .wpcf7-list-item::before {
+  content: "";
+  position: absolute;
+  top: rem(4);
+  left: 0;
+  width: rem(14);
+  height: rem(14);
+  border: rem(1) solid $green;
+}
+
+.wpcf7-checkbox .wpcf7-list-item::after {
+  content: "";
+  position: absolute;
+  top: rem(7);
+  left: rem(3);
+  display: inline-block;
+  width: rem(9);
+  height: rem(5);
+  opacity: 0;
+  border-left: rem(2) solid $orange;
+  border-bottom: rem(2) solid $orange;
+  transform: rotate(-45deg);
+}
+
+.wpcf7-checkbox .wpcf7-list-item:has(input[type="checkbox"]:checked)::after {
+  opacity: 1;
+}
+
+.wpcf7-form-control.wpcf7-select {
+  font-size: rem(16);
+  font-weight: $regular;
+  font-family: "Noto Sans JP", sans-serif;
+  color: $black;
+}
+
+
+
+.form-wrapper__body-5th p{
+  width: 100%;
+  height: 100%;
+}
+
+.wpcf7-form-control-wrap{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wpcf7-form-control.wpcf7-select{
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: rem(11) rem(8);
+  font-size: rem(12);
+  font-weight: $regular;
+  font-family: "Noto Sans JP", sans-serif;
+  color: $black;
+  @include mq("md") {
+    padding: 0 rem(20) 0 rem(8);
+  }
+}
+
+
+
+// バリデーション
+.wpcf7 form.invalid .wpcf7-response-output {
+  color: $orange;
+  text-align: center;
+  font-size:rem(14);
+  font-weight:$regular;
+  font-family:"Noto Sans JP", sans-serif;
+  border: none;
+  margin: 0;
+  padding-top: rem(15);
+  padding-bottom: rem(40);
+}
+
+
+input.wpcf7-not-valid::placeholder,
+textarea.wpcf7-not-valid::placeholder {
+  color: #ffffff; /* プレースホルダーを白色に */
+  opacity: 1;
+}
+
+.wpcf7-not-valid-tip {
+  display: none;
 }

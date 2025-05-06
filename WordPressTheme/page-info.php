@@ -75,43 +75,6 @@ get_header(); ?>
     </div>
   </section>
 
-  <div id="contact" class="contact l-contact">
-    <div class="contact__inner inner">
-      <div class="contact__wrapper">
-        <div class="contact__container1">
-          <div class="contact__logo">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/contact-logo.svg" alt="CodeUps" />
-          </div>
-          <div class="contact__contents">
-            <ul class="contact__info">
-              <li>沖縄県那覇市1-1</li>
-              <li class="tel">
-                <a href="tel:0120-000-0000">TEL:0120-000-0000</a>
-              </li>
-              <li>営業時間:8:30-19:00</li>
-              <li>定休日:毎週火曜日</li>
-            </ul>
-            <div class="contact__map">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5407.640736201455!2d127.69327721190673!3d26.218749963611163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f8!3m3!1m2!1s0x34e5697141a6b58b%3A0x2cd8aff616585e98!2z5rKW57iE55yM6YKj6KaH5biC!5e0!3m2!1sja!2sjp!4v1728902076588!5m2!1sja!2sjp"
-                width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          </div>
-        </div>
-        <div class="contact__container2">
-          <div class="contact__heading section-heading">
-            <p class="section-heading__main section-heading__main--big">contact</p>
-            <h3 class="section-heading__sub">お問い合わせ</h3>
-          </div>
-          <p class="contact__induction">ご予約・お問い合わせはコチラ</p>
-          <div class="contact__button">
-            <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    </section>
 </main>
 
 <?php get_footer(); ?>

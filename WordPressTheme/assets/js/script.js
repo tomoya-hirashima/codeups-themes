@@ -246,26 +246,19 @@ $(function () {
     });
   });
 
-  // //リンク遷移先
-  // $(function () {
-  //   // ヘッダーの高さを取得（padding や border を含む）
-  //   const headerHeight = $(".js-header").outerHeight();
+  // 【contact ページ  パンくず】
+  $(function () {
+    $(document).on('wpcf7invalid', function (event) {
+      console.log('エラー検知');
+      var $breadcrumbList = $('.breadcrumbs__items');
 
-  //   // ヘッダーの高さ分だけ main の位置を調整
-  //   $("main").css("margin-top", headerHeight);
-
-  //   // ページ内スクロール
-  //   $('a[href^="#"]').click(function (event) {
-  //     event.preventDefault(); // デフォルトの動作を無効化
-
-  //     const speed = 600;
-  //     const href = $(this).attr("href");
-  //     const target = $(href === "#" || href === "" ? "html" : href);
-
-  //     if (!target.length) return; // ターゲットがない場合は処理を中断
-
-  //     const position = target.offset().top - headerHeight;
-
-  //     $("html").animate({ scrollTop: position }, speed, "swing");
-  //   });
+      // まだエラー項目が追加されていない場合だけ追加する
+      if ($breadcrumbList.length && $breadcrumbList.find('.breadcrumbs__item--error').length === 0) {
+        $('<li>', {
+          "class": 'breadcrumbs__item breadcrumbs__item--error',
+          text: 'お問い合わせエラー'
+        }).appendTo($breadcrumbList);
+      }
+    });
+  });
 });

@@ -3,39 +3,29 @@
 <main>
   <section id="mv" class="mv">
     <div class="mv__inner">
+      <?php
+      $sliders = SCF::get('slider-img');
+      if (!empty($sliders)) : ?>
       <div class="mv__slider swiper js-swiper-mv">
         <div class="mv__swiper-wrapper swiper-wrapper">
+          <?php foreach ($sliders as $slide) :
+              $slider_pc = wp_get_attachment_image_src($slide['slider_pc'], 'full');
+              $slider_sp = wp_get_attachment_image_src($slide['slider_sp'], 'full');
+            ?>
           <div class="mv__swiper-slide swiper-slide">
             <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-sp1.jpg"
-                media="(max-width:767px)" />
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-pc1.jpg" alt="浅瀬を泳ぐウミガメ" />
+              <?php if ($slider_sp) : ?>
+              <source srcset="<?php echo esc_url($slider_sp[0]); ?>" media="(max-width:767px)" />
+              <?php endif; ?>
+              <?php if ($slider_pc) : ?>
+              <img src="<?php echo esc_url($slider_pc[0]); ?>" alt="<?php echo esc_attr($text); ?>" />
+              <?php endif; ?>
             </picture>
           </div>
-          <div class="mv__swiper-slide swiper-slide">
-            <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-sp2.jpg"
-                media="(max-width:767px)" />
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-pc2.jpg" alt="泳ぐウミガメを下から見た様子" />
-            </picture>
-          </div>
-          <div class="mv__swiper-slide swiper-slide">
-            <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-sp3.jpg"
-                media="(max-width:767px)" />
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-pc3.jpg" alt="青空と海と白い船" />
-            </picture>
-          </div>
-          <div class="mv__swiper-slide swiper-slide">
-            <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-sp4.jpg"
-                media="(max-width:767px)" />
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/mv-img-pc4.jpg"
-                alt="エメラルドグリーンの水面と青空" />
-            </picture>
-          </div>
+          <?php endforeach; ?>
         </div>
       </div>
+      <?php endif; ?>
       <div class="mv__content">
         <h2 class="mv__title">diving</h2>
         <p class="mv__text">into&nbsp;the&nbsp;ocean</p>
@@ -264,7 +254,7 @@
         </div>
       </div>
       <div class="campaign__button">
-        <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+        <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
       </div>
     </div>
   </section>
@@ -296,7 +286,7 @@
                 ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br />ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
               </p>
               <div class="about__button">
-                <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+                <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
               </div>
             </div>
           </div>
@@ -325,7 +315,7 @@
             </div>
           </div>
           <div class="info__button">
-            <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+            <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
           </div>
         </div>
       </div>
@@ -344,72 +334,47 @@
           </h2>
         </div>
         <ul class="blog__items blog-cards">
+          <?php
+          $args = array(
+            'post_type' => 'post',
+            'posts_per_page' => 3,
+          );
+          $blog_query = new WP_Query($args);
+          ?>
+          <?php if ($blog_query->have_posts()): ?>
+          <?php while ($blog_query->have_posts()) : $blog_query->the_post(); ?>
           <li class="blog-cards__item blog-card">
-            <a href="./page-blog.html#coral">
+            <a href="<?php the_permalink(); ?>">
               <figure class="blog-card__img">
-                <?php the_post_thumbnail('post-thumbnail', array('alt' => the_title_attribute('echo=0'))); ?>
-                <!-- <?php
-if ( has_post_thumbnail() ) {
-  the_post_thumbnail('post-thumbnail', array(
-    'alt' => get_the_title()
-  ));
-} else {
-  echo '<p>アイキャッチがありません</p>';
-}
-?> -->
-                has_post_thumbnail() ) {
-                the_post_thumbnail('post-thumbnail', array(
-                'alt' => get_the_title()
-                ));
-                ↓
-                the_post_thumbnail('medium');
-
-
+                <?php if (has_post_thumbnail()): ?>
+                <?php the_post_thumbnail('full'); ?>
+                <?php else: ?>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                <?php endif; ?>
               </figure>
               <div class="blog-card__body">
-                <time datetime="<?php the_time('Y-m-d'); ?>">
+                <time datetime="<?php the_time('Y-n-j'); ?>" class="blog-card__date">
                   <?php the_time('Y.m/d'); ?>
                 </time>
-                <h3 class="blog-card__title">ライセンス取得</h3>
+                <h3 class="blog-card__title"><?php the_title(); ?></h3>
                 <p class="blog-card__text">
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br />ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
+                  <?php
+                      $content = get_the_content();
+                      $content = strip_tags($content, '<br>');
+                      $content = preg_replace('/^[\s\x{3000}]+|[\s\x{3000}]+$/u', '', $content);
+                      $excerpt = mb_substr($content, 0, 89);
+                      echo nl2br($excerpt);
+                      ?>
                 </p>
               </div>
             </a>
           </li>
-          <li class="blog-cards__item blog-card">
-            <a href="./page-blog.html#turtle">
-              <figure class="blog-card__img">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/blog-turtle-img.jpg"
-                  alt="両手を広げて海の中を泳ぐウミガメ" />
-              </figure>
-              <div class="blog-card__body">
-                <time datetime="2023-11-17" class="blog-card__date">2023.11/17</time>
-                <h3 class="blog-card__title">ウミガメと泳ぐ</h3>
-                <p class="blog-card__text">
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br />ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                </p>
-              </div>
-            </a>
-          </li>
-          <li class="blog-cards__item blog-card">
-            <a href="./page-blog.html#fish">
-              <figure class="blog-card__img">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/blog-orangefish-img.jpg"
-                  alt="イソギンチャクの中のカクレクマノミ" />
-              </figure>
-              <div class="blog-card__body">
-                <time datetime="2023-11-17" class="blog-card__date">2023.11/17</time>
-                <h3 class="blog-card__title">カクレクマノミ</h3>
-                <p class="blog-card__text">
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br />ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                </p>
-              </div>
-            </a>
-          </li>
+          <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+          <?php endif; ?>
         </ul>
         <div class="blog__button">
-          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
         </div>
       </div>
     </div>
@@ -469,7 +434,7 @@ if ( has_post_thumbnail() ) {
           </li>
         </ul>
         <div class="voice__button">
-          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
         </div>
       </div>
     </div>
@@ -492,30 +457,33 @@ if ( has_post_thumbnail() ) {
           </div>
 
           <div class="price__items price-box">
+            <?php
+            $license_courses = SCF::get('license_courses');
+            $trial_diving = SCF::get('trial_diving');
+            $fun_diving = SCF::get('fun_diving');
+            $special_diving = SCF::get('special_diving');
+            ?>
+
             <table class="price-box__item price-table">
               <colgroup>
                 <col class="price-table__col1" />
                 <col class="price-table__col2" />
               </colgroup>
+              <?php if (!empty($license_courses)) : ?>
               <thead>
                 <tr>
                   <th colspan="2">ライセンス講習</th>
                 </tr>
               </thead>
               <tbody>
+                <?php foreach ($license_courses as $item) : ?>
                 <tr>
-                  <td>オープンウォーターダイバーコース</td>
-                  <td>¥50,000</td>
+                  <td><?php echo wp_kses_post($item['license_course']); ?></td>
+                  <td><?php echo wp_kses_post($item['license_price']); ?></td>
                 </tr>
-                <tr>
-                  <td>アドバンスドオープンウォーターコース</td>
-                  <td>¥60,000</td>
-                </tr>
-                <tr>
-                  <td>レスキュー＋EFRコース</td>
-                  <td>¥70,000</td>
-                </tr>
+                <?php endforeach; ?>
               </tbody>
+              <?php endif; ?>
             </table>
 
             <table class="price-box__item price-table">
@@ -602,7 +570,7 @@ if ( has_post_thumbnail() ) {
           </div>
         </div>
         <div class="price__button">
-          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
         </div>
       </div>
     </div>

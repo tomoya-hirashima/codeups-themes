@@ -7,3 +7,9 @@
     margin-top: rem(150);
   }
 }
+
+
+/* ページ内リンクのズレ防止 */
+[id^="campaign-"] {
+  scroll-margin-top: rem(90);
+}

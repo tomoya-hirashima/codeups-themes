@@ -264,7 +264,7 @@
         </div>
       </div>
       <div class="campaign__button">
-        <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+        <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
       </div>
     </div>
   </section>
@@ -296,7 +296,7 @@
                 ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br />ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
               </p>
               <div class="about__button">
-                <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+                <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
               </div>
             </div>
           </div>
@@ -391,7 +391,7 @@
           </li>
         </ul>
         <div class="blog__button">
-          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
         </div>
       </div>
     </div>
@@ -451,7 +451,7 @@
           </li>
         </ul>
         <div class="voice__button">
-          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
         </div>
       </div>
     </div>
@@ -584,7 +584,7 @@
           </div>
         </div>
         <div class="price__button">
-          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="button"><span>contact&nbsp;us</span></a>
         </div>
       </div>
     </div>
