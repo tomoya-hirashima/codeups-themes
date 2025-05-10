@@ -222,37 +222,6 @@
             <?php endforeach; ?>
           </ul>
 
-
-          <!-- <ul class="sidebar-category__past-posts past-posts">
-            <li class="past-posts__year">
-              <span class="past-posts__year-label js-past-posts-year is-open">2023</span>
-              <ul class="past-posts__month-list js-past-posts-month is-open">
-                <li class="past-posts__month">
-                  <a href="#" class="past-posts__link"><span>3月</span></a>
-                </li>
-                <li class="past-posts__month">
-                  <a href="#" class="past-posts__link"><span>2月</span></a>
-                </li>
-                <li class="past-posts__month">
-                  <a href="#" class="past-posts__link"><span>1月</span></a>
-                </li>
-              </ul>
-            </li>
-            <li class="past-posts__year">
-              <span class="past-posts__year-label js-past-posts-year">2022</span>
-              <ul class="past-posts__month-list js-past-posts-month">
-                <li class="past-posts__month">
-                  <a href="#" class="past-posts__link"><span>12月</span></a>
-                </li>
-                <li class="past-posts__month">
-                  <a href="#" class="past-posts__link"><span>11月</span></a>
-                </li>
-              </ul>
-            </li>
-          </ul> -->
-
-
-
         </div>
       </div>
 

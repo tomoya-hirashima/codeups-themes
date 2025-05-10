@@ -84,7 +84,7 @@
             <a href="./page-campaign.html#night-diving">ナイトダイビング</a>
           </li>
           <li class="nav-group__item nav-group__item--main">
-            <a href="<?php echo esc_url(home_url('/campaign/')); ?>">私たちについて</a>
+            <a href="<?php echo esc_url(home_url('/about/')); ?>">私たちについて</a>
           </li>
         </ul>
       </div>

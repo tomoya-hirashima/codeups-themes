@@ -75,6 +75,59 @@ add_action('wp_enqueue_scripts', function () {
   wp_dequeue_style('wp-pagenavi');
 }, 20);
 
+// GA4タグを<head>内に追加
+function add_ga4_tag_to_head() {
+  ?>
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ABC123DEF4"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', 'G-39DVDLERG5');
+</script>
+<?php
+}
+add_action('wp_head', 'add_ga4_tag_to_head');
+
+// Google Search Console の認証タグを <head> に追加
+function add_gsc_meta_tag() {
+  echo '<meta name="google-site-verification" content="49mLXMAruyrjPXCaUaN1qkhXccO7FFnuEE-NXOYgqJE" />' . "\n";
+}
+add_action('wp_head', 'add_gsc_meta_tag');
+
+
+// meta情報
+add_filter('pre_get_document_title', function ($title) {
+  if (is_post_type_archive('voice')) {
+      return 'お客様の声一覧｜CodeUps';
+  }
+  if (is_post_type_archive('campaign')) {
+      return 'キャンペーン情報｜CodeUps';
+  }
+  if (is_home()) { // 投稿ページ（blog）のアーカイブ
+      return 'ブログ一覧｜CodeUps';
+  }
+  return $title;
+});
+
+// <meta name="description"> をアーカイブページに出力
+add_action('wp_head', function () {
+  if (is_post_type_archive('voice')) {
+      echo '<meta name="description" content="CodeUpsで体験されたお客様の声を掲載しています。初心者の方の感想や満足度の高いレビューをチェックいただけます。">' . "\n";
+  }
+  if (is_post_type_archive('campaign')) {
+      echo '<meta name="description" content="お得なキャンペーン情報を随時更新中。体験ダイビングやライセンス講習の割引情報はこちら。">' . "\n";
+  }
+  if (is_home()) {
+      echo '<meta name="description" content="CodeUpsのブログ一覧です。ダイビングの楽しみ方や季節の海の様子、スタッフのおすすめ情報などを発信中。">' . "\n";
+  }
+});
+
+
 
 // ラベルを投稿→ブログに変更
 function Change_menulabel()
