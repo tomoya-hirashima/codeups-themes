@@ -27,9 +27,9 @@ function my_theme_enqueue_assets()
   // Theme CSS
   wp_enqueue_style(
     'theme-style',
-    get_theme_file_uri('/assets/css/style.css'),
+    get_theme_file_uri('assets/css/style.css'),
     [],
-    filemtime(get_theme_file_path('/assets/css/style.css'))
+    filemtime(get_theme_file_path('assets/css/style.css'))
   );
 
   // jQuery (from CDN)
@@ -76,10 +76,11 @@ add_action('wp_enqueue_scripts', function () {
 }, 20);
 
 // GA4タグを<head>内に追加
-function add_ga4_tag_to_head() {
-  ?>
+function add_ga4_tag_to_head()
+{
+?>
 <!-- Google Analytics GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ABC123DEF4"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-39DVDLERG5"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 
@@ -94,7 +95,8 @@ gtag('config', 'G-39DVDLERG5');
 add_action('wp_head', 'add_ga4_tag_to_head');
 
 // Google Search Console の認証タグを <head> に追加
-function add_gsc_meta_tag() {
+function add_gsc_meta_tag()
+{
   echo '<meta name="google-site-verification" content="49mLXMAruyrjPXCaUaN1qkhXccO7FFnuEE-NXOYgqJE" />' . "\n";
 }
 add_action('wp_head', 'add_gsc_meta_tag');
@@ -103,13 +105,13 @@ add_action('wp_head', 'add_gsc_meta_tag');
 // meta情報
 add_filter('pre_get_document_title', function ($title) {
   if (is_post_type_archive('voice')) {
-      return 'お客様の声一覧｜CodeUps';
+    return 'お客様の声一覧｜CodeUps';
   }
   if (is_post_type_archive('campaign')) {
-      return 'キャンペーン情報｜CodeUps';
+    return 'キャンペーン情報｜CodeUps';
   }
   if (is_home()) { // 投稿ページ（blog）のアーカイブ
-      return 'ブログ一覧｜CodeUps';
+    return 'ブログ一覧｜CodeUps';
   }
   return $title;
 });
@@ -117,13 +119,13 @@ add_filter('pre_get_document_title', function ($title) {
 // <meta name="description"> をアーカイブページに出力
 add_action('wp_head', function () {
   if (is_post_type_archive('voice')) {
-      echo '<meta name="description" content="CodeUpsで体験されたお客様の声を掲載しています。初心者の方の感想や満足度の高いレビューをチェックいただけます。">' . "\n";
+    echo '<meta name="description" content="CodeUpsで体験されたお客様の声を掲載しています。初心者の方の感想や満足度の高いレビューをチェックいただけます。">' . "\n";
   }
   if (is_post_type_archive('campaign')) {
-      echo '<meta name="description" content="お得なキャンペーン情報を随時更新中。体験ダイビングやライセンス講習の割引情報はこちら。">' . "\n";
+    echo '<meta name="description" content="お得なキャンペーン情報を随時更新中。体験ダイビングやライセンス講習の割引情報はこちら。">' . "\n";
   }
   if (is_home()) {
-      echo '<meta name="description" content="CodeUpsのブログ一覧です。ダイビングの楽しみ方や季節の海の様子、スタッフのおすすめ情報などを発信中。">' . "\n";
+    echo '<meta name="description" content="CodeUpsのブログ一覧です。ダイビングの楽しみ方や季節の海の様子、スタッフのおすすめ情報などを発信中。">' . "\n";
   }
 });
 
@@ -174,12 +176,19 @@ function change_posts_per_page_by_post_type($query)
     if (is_post_type_archive('voice')) {
       $query->set('posts_per_page', 6); // お客様の声一覧は6件
     }
+
+     // タクソノミー「voice_category」のアーカイブ（taxonomy-voice_category.php）
+    if (is_tax('voice_category')) {
+      $query->set('posts_per_page', 6);
+    }
+
   }
 }
 add_action('pre_get_posts', 'change_posts_per_page_by_post_type');
 
 // Breadcrumb NavXTの出力からhomeリストアイテムを削除
-function custom_bcn_display_list_items($html) {
+function custom_bcn_display_list_items($html)
+{
   // 正規表現で<li class="home"></li>を削除
   $html = preg_replace('/<li class="home"><\/li>/', '', $html);
   return $html;
@@ -187,7 +196,8 @@ function custom_bcn_display_list_items($html) {
 add_filter('bcn_display_list_items', 'custom_bcn_display_list_items', 10);
 
 // Uncategorizedを非表示
-function bcn_remove_uncategorized($trail) {
+function bcn_remove_uncategorized($trail)
+{
   if (!is_single()) return $trail; // 投稿ページ以外は処理しない
 
   foreach ($trail->breadcrumbs as $key => $crumb) {
@@ -207,11 +217,12 @@ add_filter('bcn_after_fill', 'bcn_remove_uncategorized');
 
 
 // 記事を開いたときにviewsを1増やす
-function set_post_views($postID) {
+function set_post_views($postID)
+{
   $count_key = 'views'; // フィールド名を指定
   $count = get_post_meta($postID, $count_key, true);
 
-  if($count == ''){
+  if ($count == '') {
     $count = 0;
     delete_post_meta($postID, $count_key); // 念のため初期化
     add_post_meta($postID, $count_key, '0');
@@ -222,9 +233,10 @@ function set_post_views($postID) {
 }
 
 // WordPressの既存のメタ情報（アイキャッチとか）にviewを表示させないようにする（オプション）
-function track_post_views($post_id) {
-  if ( !is_single() ) return;
-  if ( empty ( $post_id ) ) {
+function track_post_views($post_id)
+{
+  if (!is_single()) return;
+  if (empty($post_id)) {
     global $post;
     $post_id = $post->ID;
   }
@@ -237,7 +249,8 @@ add_filter('wpcf7_autop_or_not', '__return_false');
 
 
 // 独自ログインURL（例: /my-login）でログインページを表示
-function custom_login_url() {
+function custom_login_url()
+{
   $request_uri = $_SERVER['REQUEST_URI'];
 
   // /my-login にアクセスされた場合、wp-login.php を読み込む

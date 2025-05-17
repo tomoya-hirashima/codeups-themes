@@ -1,0 +1,110 @@
+@use "global" as *;
+
+
+.send-button {
+  position: relative;
+  width: rem(202);
+  border: rem(1) solid $green;
+  background-color: $green;
+  transition: 0.3s ease;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-inline: auto;
+  display: flex;
+}
+
+.send-button::before {
+  content: "";
+  position: absolute;
+  top: rem(4);
+  left: rem(4);
+  display: inline-block;
+  width: rem(202);
+  height: rem(54);
+  padding: 0 rem(4) rem(4) 0;
+  border: rem(1) solid $green;
+  z-index: 1;
+}
+
+.send-button::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: rem(202);
+  height: 100%;
+  background: $white;
+  transform: scale(0, 1);
+  transform-origin: left top;
+  transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1);
+  z-index: 2;
+}
+
+
+.send-button:hover {
+  background-color: $white;
+  color: $green;
+}
+
+.send-button:hover::after {
+  transform: scale(1, 1);
+}
+
+.send-button:hover .send-button-arrow::before,
+.send-button:hover .send-button-arrow::after {
+  background-color: $green;
+}
+
+
+.send-button-arrow {
+  position: absolute;
+  top: 50%;
+  right: rem(56);
+  width: rem(40);
+  height: rem(1);
+  background: none;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.send-button-arrow::before,
+.send-button-arrow::after {
+  content: "";
+  position: absolute;
+  background-color:  $white;
+  height: rem(1);
+  transition: 0.3s background-color;
+}
+
+.send-button-arrow::before {
+  width: rem(40);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.send-button-arrow::after {
+  width: rem(9.2);
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+  transform-origin: right center;
+}
+
+
+.wpcf7-form-control.wpcf7-submit{
+  position: relative;
+    color: #fff;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: rem(14);
+    line-height: 1.571;
+    padding:  rem(16) rem(112) rem(16) rem(56);
+    text-transform: capitalize;
+    transition: 0.3s ease;
+     background-color: transparent;
+    z-index: 3;
+}
+
+.wpcf7 .wpcf7-submit:disabled {
+    cursor: pointer;
+}

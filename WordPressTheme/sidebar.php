@@ -76,9 +76,10 @@
               <?php endif; ?>
             </div>
             <div class="sidebar-voice-card__body">
-              <?php if ($voice_character) : ?>
-              <p class="sidebar-voice-card__character"><?php echo esc_html($voice_character); ?></p>
-              <?php endif; ?>
+              <?php
+                  $voice_character = get_field('voice_character');
+                  ?>
+              <p class="sidebar-voice-card__character"><?php echo $voice_character; ?></p>
               <p class="sidebar-voice-card__title">
                 <?php the_title(); ?>
               </p>

@@ -17,10 +17,10 @@ get_header(); ?>
     <div class="breadcrumbs__inner inner">
       <ul class="breadcrumbs__items">
         <li class="breadcrumbs__item">
-          <a href="index.html">TOP</a>
+          <a href="<?php echo esc_url(home_url('/')); ?>">TOP</a>
         </li>
         <li class="breadcrumbs__item">
-          <a href="./page-contact.html">お問い合わせ</a>
+          <a href="<?php echo esc_url(home_url('/contact/')); ?>">お問い合わせ</a>
         </li>
         <li class="breadcrumbs__item">送信完了</li>
       </ul>

@@ -25,14 +25,15 @@
         ?>
         <div class="page-campaign-main__tab-group tabs">
           <!-- 「ALL」リンク -->
-          <a class="tabs__item tab is-active" href="<?php echo get_post_type_archive_link('campaign'); ?>">ALL</a>
+          <a class="tabs__item tab is-active" data-tab="all"
+            href="<?php echo get_post_type_archive_link('campaign'); ?>">ALL</a>
           </a>
           <!-- 各カテゴリのリンク -->
           <?php foreach ($terms as $term) : ?>
-          <a class="tabs__item tab" href="#<?php echo esc_url(get_term_link($term)); ?>">
+          <a class="tabs__item tab" data-tab="<?php echo esc_attr($term->slug); ?>"
+            href="<?php echo esc_url(get_term_link($term)); ?>">
             <?php echo esc_html($term->name); ?>
           </a>
-
           <?php endforeach; ?>
         </div>
         <?php endif; ?>
@@ -91,7 +92,8 @@
                           ご予約・お問い合わせはコチラ
                         </p>
                         <div class="campaign-card__button">
-                          <a href="./page-contact.html" class="button"><span>contact&nbsp;us</span></a>
+                          <a href="<?php echo esc_url(home_url('/contact/')); ?>"
+                            class="button"><span>contact&nbsp;us</span></a>
                         </div>
                       </div>
                     </div>
@@ -101,7 +103,6 @@
               <?php endif; ?>
               <?php endwhile; ?>
               <?php endif; ?>
-
             </div>
           </div>
         </div>
@@ -113,19 +114,6 @@
           <?php wp_pagenavi(); ?>
           <?php endif; ?>
         </div>
-
-
-        <!-- <ul class="page-campaign-main__pagination pagination">
-          <li class="pagination__prev"><a href="#"></a></li>
-          <li class="pagination__item is-active"><a href="#">1</a></li>
-          <li class="pagination__item"><a href="#">2</a></li>
-          <li class="pagination__item"><a href="#">3</a></li>
-          <li class="pagination__item"><a href="#">4</a></li>
-          <li class="pagination__item u-desktop"><a href="#">5</a></li>
-          <li class="pagination__item u-desktop"><a href="#">6</a></li>
-          <li class="pagination__next"><a href="#"></a></li>
-        </ul> -->
-
       </div>
     </div>
   </section>

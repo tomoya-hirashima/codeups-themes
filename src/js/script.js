@@ -113,6 +113,41 @@ $(function () {
   });
 
   //タブの切り替え(campaign)
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tab');
+  const contents = document.querySelectorAll('.tab-content');
+
+  function activateTab(tabName) {
+    tabs.forEach(tab => {
+      tab.classList.toggle('is-active', tab.dataset.tab === tabName);
+    });
+
+    contents.forEach(content => {
+      content.classList.toggle('is-active', content.dataset.content === tabName);
+    });
+  }
+
+  // 1. URLのクエリパラメータから初期タブを読み取る
+  const params = new URLSearchParams(window.location.search);
+  const initialTab = params.get('tab') || 'all'; // デフォルトは "all"
+  activateTab(initialTab);
+
+  // 2. タブクリック時の非同期切り替え
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      const isSamePage = tab.getAttribute('href').startsWith('?tab=');
+      if (isSamePage) {
+        e.preventDefault(); // 遷移を止めてJSで処理
+        const tabName = tab.dataset.tab;
+        activateTab(tabName);
+        history.replaceState(null, '', `?tab=${tabName}`);
+      }
+    });
+  });
+});
+
+
+  //タブの切り替え(campaign)
   // $(function () {
   //   const tabButton = $(".js-tab"),
   //     tabContent = $(".js-tab-content");
@@ -191,33 +226,6 @@ $(function () {
 });
 
 
-
-//   $(document).ready(function() {
-//     function openTab(hash) {
-//         $(".js-info-tab-content").removeClass("is-active");
-//         if (hash) {
-//             $(hash).addClass("is-active");
-//         } else {
-//             $("#info-tab1").addClass("is-active"); // デフォルトはタブ1
-//         }
-//     }
-
-//     // 最初にURLのハッシュを見てタブを開く
-//     openTab(location.hash);
-
-//     // タブをクリックしたときにハッシュを更新
-//     $(".tab-link").on("click", function(e) {
-//         e.preventDefault(); // 通常のリンク動作を防ぐ
-//         var target = $(this).attr("href");
-//         history.pushState(null, null, target); // URLを変更
-//         openTab(target);
-//     });
-
-//     // 戻るボタン対応
-//     $(window).on("hashchange", function() {
-//         openTab(location.hash);
-//     });
-// });
 
   // 【blog ページ】
   //トグル展開(サイドバー)

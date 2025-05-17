@@ -2066,6 +2066,112 @@ body {
 	color: #fff;
 }
 
+.send-button {
+	background-color: #408F95;
+	border: 0.0625rem solid #408F95;
+	cursor: pointer;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	transition: 0.3s ease;
+	transition: 0.3s ease;
+	width: 12.625rem;
+}
+
+.send-button::before {
+	border: 0.0625rem solid #408F95;
+	content: "";
+	display: inline-block;
+	height: 3.375rem;
+	left: 0.25rem;
+	padding: 0 0.25rem 0.25rem 0;
+	position: absolute;
+	top: 0.25rem;
+	width: 12.625rem;
+	z-index: 1;
+}
+
+.send-button::after {
+	background: #fff;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transform: scale(0, 1);
+	transform-origin: left top;
+	transition: 0.2s cubic-bezier(0.45, 0, 0.55, 1);
+	width: 12.625rem;
+	z-index: 2;
+}
+
+.send-button:hover {
+	background-color: #fff;
+	color: #408F95;
+}
+
+.send-button:hover::after {
+	transform: scale(1, 1);
+}
+
+.send-button:hover .send-button-arrow::before,
+.send-button:hover .send-button-arrow::after {
+	background-color: #408F95;
+}
+
+.send-button-arrow {
+	background: none;
+	height: 0.0625rem;
+	position: absolute;
+	right: 3.5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2.5rem;
+	z-index: 3;
+}
+
+.send-button-arrow::before,
+.send-button-arrow::after {
+	background-color: #fff;
+	content: "";
+	height: 0.0625rem;
+	position: absolute;
+	transition: 0.3s background-color;
+}
+
+.send-button-arrow::before {
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2.5rem;
+}
+
+.send-button-arrow::after {
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%) rotate(45deg);
+	transform-origin: right center;
+	width: 0.575rem;
+}
+
+.wpcf7-form-control.wpcf7-submit {
+	background-color: transparent;
+	color: #fff;
+	font-family: "Noto Sans JP", sans-serif;
+	font-size: 0.875rem;
+	line-height: 1.571;
+	padding: 1rem 7rem 1rem 3.5rem;
+	position: relative;
+	text-transform: capitalize;
+	transition: 0.3s ease;
+	z-index: 3;
+}
+
+.wpcf7 .wpcf7-submit:disabled {
+	cursor: pointer;
+}
+
 .tab-content {
 	display: none;
 }
@@ -2519,6 +2625,7 @@ body {
 
 .form-wrapper__body {
 	margin-top: 0.75rem;
+	padding: 0;
 	width: 100%;
 }
 
@@ -2565,13 +2672,13 @@ body {
 }
 
 .form-wrapper__body.form-wrapper__body-6th {
-	height: 12.5rem;
-	overflow: scroll; /*スクロールバー非表示（Firefox）*/
+	height: 12.5rem; /*スクロールバー非表示（Firefox）*/
 	scrollbar-width: none;
 }
 
 .wpcf7-form-control.wpcf7-textarea {
 	height: 100%;
+	overflow: scroll;
 }
 
 /*スクロールバー非表示（Chrome・Safari・Edge）*/
@@ -2673,6 +2780,7 @@ body {
 
 .wpcf7-form-control.wpcf7-acceptance {
 	display: block;
+	padding: 0;
 	width: 100%;
 }
 
@@ -2683,11 +2791,16 @@ body {
 
 .wpcf7-checkbox .wpcf7-list-item {
 	display: block;
-}
-
-.wpcf7-checkbox .wpcf7-list-item {
 	padding-left: 1.375rem;
 	position: relative;
+}
+
+.wpcf7-form-control.wpcf7-checkbox {
+	padding: 0;
+}
+
+.wpcf7-list-item {
+	margin: 0;
 }
 
 .wpcf7-checkbox .wpcf7-list-item::before {
@@ -2718,13 +2831,6 @@ body {
 	opacity: 1;
 }
 
-.wpcf7-form-control.wpcf7-select {
-	color: #0D2936;
-	font-family: "Noto Sans JP", sans-serif;
-	font-size: 1rem;
-	font-weight: 400;
-}
-
 .form-wrapper__body-5th p {
 	height: 100%;
 	width: 100%;
@@ -2743,6 +2849,7 @@ body {
 	font-size: 0.75rem;
 	font-weight: 400;
 	height: 100%;
+	line-height: 1.16;
 	padding: 0.6875rem 0.5rem;
 	width: 100%;
 }
@@ -4639,7 +4746,7 @@ footer {
 }
 
 .wpcf7-form-control.wpcf7-select {
-	padding: 0 1.25rem 0 0.5rem;
+	padding: 0.4375rem 1.25rem 0.4375rem 0.5rem;
 }
 
 .form__wrapper:not(:first-child) {

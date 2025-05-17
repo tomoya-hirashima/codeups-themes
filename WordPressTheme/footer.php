@@ -56,11 +56,11 @@
       </h2>
       <ul class="footer__icon">
         <li class="footer__icon-facebook">
-          <a href="#" target="_blank" rel="noopener noreferrer"><img
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img
               src="<?php echo get_theme_file_uri(); ?>/assets/images/common/facebook-logo.svg" alt="facebook" /></a>
         </li>
         <li class="footer__icon-instagram">
-          <a href="#" target="_blank" rel="noopener noreferrer"><img
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><img
               src="<?php echo get_theme_file_uri(); ?>/assets/images/common/instagram-logo.svg" alt="instagram" /></a>
         </li>
       </ul>
@@ -73,15 +73,15 @@
             <a href="<?php echo esc_url(home_url('/campaign/')); ?>">キャンペーン</a>
           </li>
           <li class="nav-group__item">
-            <a href="<?php echo home_url(); ?>/campaign#license">
+            <a href="<?php echo (home_url('/campaign-category/')); ?>?tab=license">
               ライセンス取得
             </a>
           </li>
           <li class="nav-group__item">
-            <a href="./page-campaign.html#private-booking">貸切体験ダイビング</a>
+            <a href="<?php echo (home_url('/campaign-category/')); ?>?tab=fun-diving">ファンダイビング</a>
           </li>
           <li class="nav-group__item">
-            <a href="./page-campaign.html#night-diving">ナイトダイビング</a>
+            <a href="<?php echo (home_url('/campaign-category/')); ?>?tab=trial-diving">体験ダイビング</a>
           </li>
           <li class="nav-group__item nav-group__item--main">
             <a href="<?php echo esc_url(home_url('/about/')); ?>">私たちについて</a>
@@ -144,6 +144,9 @@
           </li>
           <li class="nav-group__item nav-group__item--main">
             <a href="<?php echo esc_url(home_url('/contact/')); ?>">お問い合わせ</a>
+          </li>
+          <li class="nav-group__item nav-group__item--main">
+            <a href="<?php echo esc_url(home_url('/sitemap/')); ?>">サイトマップ</a>
           </li>
         </ul>
       </div>
