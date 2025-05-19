@@ -980,20 +980,6 @@ a {
 	position: relative;
 }
 
-.page-voice-main__container::before {
-	background-image: url(../images/common/sub-voice-backimg.png);
-	background-repeat: no-repeat;
-	background-size: cover;
-	content: "";
-	display: inline-block;
-	height: 8.625rem;
-	left: calc(50% - min(48vw, 57.035%));
-	position: absolute;
-	top: -4.375rem;
-	width: 18.8125rem;
-	z-index: -1;
-}
-
 .page-voice-main__tab-contents {
 	margin-top: 2.5rem;
 }
@@ -1127,18 +1113,6 @@ body.is-scroll {
 
 .breadcrumbs__item.breadcrumbs__item--white:not(:last-child):after {
 	background-image: url(../images/common/breadcrumb-arrow-white.svg);
-}
-
-.breadcrumbs__items .home {
-	display: none;
-}
-
-.breadcrumbs__items a[aria-current=page] {
-	-webkit-text-decoration: none;
-	color: inherit; /* 文字色を普通のテキストと同じにする */
-	cursor: default; /* マウスポインタを通常矢印にする */
-	pointer-events: none; /* クリックできなくする */
-	text-decoration: none; /* 下線も消す（必要なら） */
 }
 
 .button {
@@ -3242,6 +3216,7 @@ textarea.wpcf7-not-valid::placeholder {
 .page-price-box__item {
 	margin-left: auto;
 	margin-right: auto;
+	scroll-margin-top: 5.625rem;
 }
 
 .page-price-table {

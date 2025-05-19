@@ -66,7 +66,7 @@ get_header(); ?>
         <!-- モーダル -->
         <div class="modal js-modal">
           <div class="modal__content">
-            <img src="about:blank" alt="プレビュー画像" class="modal__img">
+            <img src="" alt="" class="modal__img">
           </div>
         </div>
 

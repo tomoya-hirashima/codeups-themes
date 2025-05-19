@@ -74,7 +74,14 @@
                     </figure>
                   </div>
                   <p class="voice-card__text">
-                    <?php the_content(); ?>
+                    <?php
+    $content = get_the_content();
+    $content = strip_tags( $content ); // HTMLタグだけ除去（改行コードは残す）
+    $trimmed_content = mb_substr( $content, 0, 171 ); // 60文字に制限
+    $trimmed_content .= (mb_strlen($content) > 171) ? '…' : ''; // 60文字超なら「…」追加
+    $trimmed_content = nl2br( $trimmed_content ); // 改行コード（\n）を <br> に変換
+    echo $trimmed_content;
+  ?>
                   </p>
                 </div>
               </li>

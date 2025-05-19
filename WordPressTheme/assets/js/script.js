@@ -122,13 +122,9 @@ $(function () {
         content.classList.toggle('is-active', content.dataset.content === tabName);
       });
     }
-
-    // 1. URLのクエリパラメータから初期タブを読み取る
     var params = new URLSearchParams(window.location.search);
     var initialTab = params.get('tab') || 'all'; // デフォルトは "all"
     activateTab(initialTab);
-
-    // 2. タブクリック時の非同期切り替え
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function (e) {
         var isSamePage = tab.getAttribute('href').startsWith('?tab=');
@@ -143,19 +139,38 @@ $(function () {
   });
 
   //タブの切り替え(campaign)
-  // $(function () {
-  //   const tabButton = $(".js-tab"),
-  //     tabContent = $(".js-tab-content");
-  //   tabButton.on("click", function () {
-  //     let index = tabButton.index(this);
+  document.addEventListener('DOMContentLoaded', function () {
+    var tabs = document.querySelectorAll('.tab');
+    var contents = document.querySelectorAll('.tab-content');
+    function activateTab(tabName) {
+      tabs.forEach(function (tab) {
+        tab.classList.toggle('is-active', tab.dataset.tab === tabName);
+      });
+      contents.forEach(function (content) {
+        content.classList.toggle('is-active', content.dataset.content === tabName);
+      });
+    }
 
-  //     tabButton.removeClass("is-active");
-  //     $(this).addClass("is-active");
-  //     tabContent.removeClass("is-active");
-  //     tabContent.eq(index).addClass("is-active");
-  //   });
-  // });
+    // URLパラメータを読み取って初期表示
+    var params = new URLSearchParams(window.location.search);
+    var initialTab = params.get('tab') || 'all';
+    activateTab(initialTab);
 
+    // タブクリック時の処理
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function (e) {
+        var tabName = tab.dataset.tab;
+        var href = tab.getAttribute('href');
+
+        // 「?tab=〇〇」だけのリンクならページ遷移をキャンセル
+        if (href && href.startsWith('?tab=')) {
+          e.preventDefault(); // ←これが重要！
+          activateTab(tabName);
+          history.replaceState(null, '', "?tab=".concat(tabName));
+        }
+      });
+    });
+  });
   $(function () {
     var $galleryItems = $(".js-modal-open");
     var $modal = $(".js-modal");

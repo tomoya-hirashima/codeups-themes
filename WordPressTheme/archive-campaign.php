@@ -40,7 +40,7 @@
 
         <!-- コンテンツ -->
         <div class="page-campaign-main__tab-contents tab-contents">
-          <div class="tab-contents__item tab-content is-active" id="all">
+          <div class="tab-contents__item tab-content is-active" data-content="all">
             <div class="tab-content__container page-campaign-cards">
               <?php if (have_posts()) : ?>
               <?php while (have_posts()): the_post(); ?>
@@ -106,6 +106,7 @@
             </div>
           </div>
         </div>
+
 
         <!-- ページネーション -->
         <div class="page-campaign-main__pagination pagination">
