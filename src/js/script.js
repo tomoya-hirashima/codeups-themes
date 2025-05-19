@@ -127,12 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 1. URLのクエリパラメータから初期タブを読み取る
   const params = new URLSearchParams(window.location.search);
   const initialTab = params.get('tab') || 'all'; // デフォルトは "all"
   activateTab(initialTab);
 
-  // 2. タブクリック時の非同期切り替え
   tabs.forEach(tab => {
     tab.addEventListener('click', (e) => {
       const isSamePage = tab.getAttribute('href').startsWith('?tab=');
@@ -146,20 +144,43 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
   //タブの切り替え(campaign)
-  // $(function () {
-  //   const tabButton = $(".js-tab"),
-  //     tabContent = $(".js-tab-content");
-  //   tabButton.on("click", function () {
-  //     let index = tabButton.index(this);
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tab');
+  const contents = document.querySelectorAll('.tab-content');
 
-  //     tabButton.removeClass("is-active");
-  //     $(this).addClass("is-active");
-  //     tabContent.removeClass("is-active");
-  //     tabContent.eq(index).addClass("is-active");
-  //   });
-  // });
+  function activateTab(tabName) {
+    tabs.forEach(tab => {
+      tab.classList.toggle('is-active', tab.dataset.tab === tabName);
+    });
+
+    contents.forEach(content => {
+      content.classList.toggle('is-active', content.dataset.content === tabName);
+    });
+  }
+
+  // URLパラメータを読み取って初期表示
+  const params = new URLSearchParams(window.location.search);
+  const initialTab = params.get('tab') || 'all';
+  activateTab(initialTab);
+
+  // タブクリック時の処理
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      const tabName = tab.dataset.tab;
+      const href = tab.getAttribute('href');
+
+      // 「?tab=〇〇」だけのリンクならページ遷移をキャンセル
+      if (href && href.startsWith('?tab=')) {
+        e.preventDefault(); // ←これが重要！
+        activateTab(tabName);
+        history.replaceState(null, '', `?tab=${tabName}`);
+      }
+    });
+  });
+});
+
+
 
   $(function () {
     var $galleryItems = $(".js-modal-open");

@@ -67,15 +67,3 @@
   background-image: url(../images/common/breadcrumb-arrow-white.svg);
 }
 
-
-// WP化
-.breadcrumbs__items .home {
-  display: none;
-}
-
-.breadcrumbs__items a[aria-current="page"] {
-  pointer-events: none; /* クリックできなくする */
-  text-decoration: none; /* 下線も消す（必要なら） */
-  color: inherit; /* 文字色を普通のテキストと同じにする */
-  cursor: default; /* マウスポインタを通常矢印にする */
-}

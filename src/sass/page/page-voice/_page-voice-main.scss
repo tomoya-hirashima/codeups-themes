@@ -8,19 +8,19 @@
   position: relative;
 }
 
-.page-voice-main__container::before {
-  content: "";
-  position: absolute;
-  top: rem(-70);
-  left: calc(50% - min(48vw, 57.035%));
-  display: inline-block;
-  width: rem(301);
-  height: rem(138);
-  background-image: url(../images/common/sub-voice-backimg.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  z-index: -1;
-}
+// .page-voice-main__container::before {
+//   content: "";
+//   position: absolute;
+//   top: rem(-70);
+//   left: calc(50% - min(48vw, 57.035%));
+//   display: inline-block;
+//   width: rem(301);
+//   height: rem(138);
+//   background-image: url(../images/common/sub-voice-backimg.png);
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   z-index: -1;
+// }
 
 .page-voice-main__tab-group {
   @include mq("md") {
