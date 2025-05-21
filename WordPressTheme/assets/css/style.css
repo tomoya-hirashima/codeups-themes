@@ -1,3 +1,5 @@
+/* リキッドレイアウト対応 */
+
 /* 20→15へ変更 */
 
 body {
@@ -7,8 +9,6 @@ body {
 .u-desktop {
 	display: none;
 }
-
-/* リキッドレイアウト対応 */
 
 html {
 	font-size: 16px;
@@ -2632,7 +2632,6 @@ body {
 }
 
 .form-wrapper__body-5th::after {
-	-webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
 	aspect-ratio: 0.86603;
 	background: #408f95;
 	bottom: 1.125rem;
@@ -3339,8 +3338,7 @@ textarea.wpcf7-not-valid::placeholder {
 }
 
 .past-posts__year-label::before {
-	-webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
-	aspect-ratio: 0.86603;
+	aspect-ratio: 0.8660254038;
 	background: #408F95;
 	clip-path: polygon(0 0, 100% 50%, 0 100%);
 	content: "";
@@ -3379,8 +3377,7 @@ textarea.wpcf7-not-valid::placeholder {
 }
 
 .past-posts__link span::before {
-	-webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
-	aspect-ratio: 0.86603;
+	aspect-ratio: 0.8660254038;
 	background: #408F95;
 	clip-path: polygon(0 0, 100% 50%, 0 100%);
 	content: "";
@@ -3396,8 +3393,7 @@ textarea.wpcf7-not-valid::placeholder {
 /* HTML: <div class="triangle"></div> */
 
 .triangle {
-	-webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
-	aspect-ratio: 0.86603;
+	aspect-ratio: 0.8660254038;
 	background: #408F95;
 	clip-path: polygon(0 0, 100% 50%, 0 100%);
 	height: 1.125rem;
