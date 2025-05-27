@@ -6,6 +6,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="robots" content="noindex" />
+
+  <!-- ogp -->
+  <meta property="og:title" content="CodeUps" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kenpi555.xsrv.jp/codeups-diving/wp-test/" />
+  <meta property="og:image"
+    content="https://kenpi555.xsrv.jp/codeups-diving/wp-test/themes/src/images/common/ogp-image.png" />
+  <meta property="og:site_name" content="CodeUps" />
+  <meta property="og:description" content="CodeUpsでは沖縄のダイビング会社です。様々なダイビングプランを用意しております。" />
+  <meta name="twitter:card" content="summary" />
+
   <?php wp_head(); ?>
 </head>
 
