@@ -2492,8 +2492,10 @@ body {
 .blog-detail__eyecatch img {
 	-o-object-fit: cover;
 	aspect-ratio: 345/231;
+	height: 100%;
 	margin-top: 1.5rem;
 	object-fit: cover;
+	width: 100%;
 }
 
 .blog-detail__body img {
