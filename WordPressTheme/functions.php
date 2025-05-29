@@ -260,3 +260,40 @@ function custom_login_url()
   }
 }
 add_action('init', 'custom_login_url');
+
+
+// 管理画面用CSSを読み込む
+function load_custom_admin_styles($hook) {
+    // ダッシュボードだけに絞る場合は以下条件を追加:
+    // if ('index.php' !== $hook) return;
+
+    wp_enqueue_style(
+        'custom_admin_css',
+        get_template_directory_uri() . '/admin-style.css',
+        array(),
+        filemtime(get_template_directory() . '/admin-style.css') // キャッシュ対策
+    );
+}
+add_action('admin_enqueue_scripts', 'load_custom_admin_styles');
+
+
+// ダッシュボードにコンテンツ更新のウィジェットを追加
+function add_custom_dashboard_widget() {
+    wp_add_dashboard_widget(
+        'custom_dashboard_widget', // ウィジェットID
+        'コンテンツ追加・更新',           // タイトル
+        'custom_dashboard_widget_display' // 表示内容のコールバック関数
+    );
+}
+add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
+
+// ウィジェットの中身を定義
+function custom_dashboard_widget_display() {
+    ?>
+<div class="custom-dashboard-box">
+  <a href="/wp-admin/post-new.php" class="widget-button widget-button--blue">＋ブログ新規追加</a>
+  <a href="/wp-admin/edit.php?post_type=campaign" class="widget-button widget-button--green">キャンペーン一覧</a>
+  <a href="/wp-admin/post-new.php?post_type=voice" class="widget-button widget-button--purple">お客様の声 新規追加</a>
+</div>
+<?php
+}
