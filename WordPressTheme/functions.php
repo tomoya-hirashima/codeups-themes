@@ -291,9 +291,9 @@ add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
 function custom_dashboard_widget_display() {
     ?>
 <div class="custom-dashboard-box">
-  <a href="/wp-admin/post-new.php" class="widget-button widget-button--blue">＋ブログ新規追加</a>
-  <a href="/wp-admin/edit.php?post_type=campaign" class="widget-button widget-button--green">キャンペーン一覧</a>
-  <a href="/wp-admin/post-new.php?post_type=voice" class="widget-button widget-button--purple">お客様の声 新規追加</a>
+  <a href="./wp-admin/post-new.php" class="widget-button widget-button--blue">＋ブログ新規追加</a>
+  <a href="./wp-admin/edit.php?post_type=campaign" class="widget-button widget-button--green">キャンペーン一覧</a>
+  <a href="./wp-admin/post-new.php?post_type=voice" class="widget-button widget-button--purple">お客様の声 新規追加</a>
 </div>
 <?php
 }

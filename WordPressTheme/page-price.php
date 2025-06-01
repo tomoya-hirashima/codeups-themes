@@ -4,7 +4,6 @@ Template Name:料金一覧
 */
 get_header(); ?>
 
-<main>
   <section id="page-price-hero" class="page-price-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -14,18 +13,17 @@ get_header(); ?>
   </section>
 
 
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <section id="page-price-main" class="page-price-main l-page-price-main">
     <div class="page-price-main__inner inner">
       <div class="page-price-main__container">
         <?php
-        $license_courses = SCF::get('license_courses');
-        $trial_diving = SCF::get('trial_diving');
-        $fun_diving = SCF::get('fun_diving');
-        $special_diving = SCF::get('special_diving');
+          $license_courses = SCF::get('license_courses');
+          $trial_diving = SCF::get('trial_diving');
+          $fun_diving = SCF::get('fun_diving');
+          $special_diving = SCF::get('special_diving');
         ?>
-
         <div class="page-price-main__items page-price-box">
           <table class="page-price-box__item page-price-table" id="license">
             <?php if (!empty($license_courses)) : ?>
@@ -103,11 +101,8 @@ get_header(); ?>
             <?php endif; ?>
           </table>
         </div>
-
       </div>
     </div>
   </section>
-
-</main>
 
 <?php get_footer(); ?>

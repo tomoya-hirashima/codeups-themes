@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 
-<main>
   <section id="page-blog-hero" class="page-blog-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -10,7 +9,7 @@
   </section>
 
   <!-- パンくずリスト -->
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <?php if ( have_posts() ) : ?>
   <?php while(have_posts()): the_post(); ?>
@@ -21,9 +20,9 @@
         <div class="page-blog-main__detail blog-detail">
           <!-- 投稿日 -->
           <p class="blog-detail__date">
-            <time datetime="<?php the_time('Y.n.j'); ?>">
-              <?php the_time('Y.m/d'); ?>
-            </time>
+          <time datetime="<?php echo get_the_date('c'); ?>">
+            <?php echo get_the_date('Y.m/d'); ?>
+          </time>
           </p>
           <!-- タイトル -->
           <h2 class="blog-detail__title">
@@ -68,10 +67,9 @@
 
 
         <!-- サイドバー -->
-        <?php get_sidebar(); ?>
+        <?php get_template_part('parts/sidebar'); ?>
       </div>
     </div>
   </section>
-</main>
 
 <?php get_footer(); ?>

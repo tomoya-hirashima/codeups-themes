@@ -1,10 +1,13 @@
+</main>
+
 <div class="pagetop-button js-pagetop">
   <a href="#mv">
-    <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/pagetop-button.png" alt="ページトップボタン" /></a>
+    <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/pagetop-button.png" alt="ページトップボタン" />
+  </a>
 </div>
 
 
-<?php if (!is_page('contact') &&  !is_404()) : ?>
+<?php if (!(is_404() || is_page('contact'))) : ?>
 <div id="contact" class="contact l-contact">
   <div class="contact__inner inner">
     <div class="contact__wrapper">

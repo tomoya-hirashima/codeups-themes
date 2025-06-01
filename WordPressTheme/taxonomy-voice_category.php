@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 
-<main>
   <section id="page-voice-hero" class="page-voice-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -9,7 +8,7 @@
     </div>
   </section>
 
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <section id="page-voice-main" class="page-voice-main l-page-voice-main">
     <div class="page-voice-main__inner inner">
@@ -35,9 +34,9 @@
           <!-- カテゴリタブ -->
           <?php foreach ($terms as $term) : ?>
           <?php
-              // 現在表示中のカテゴリIDと一致したら is-active クラスを付与
-              $is_active = (is_tax('voice_category') && $term->term_id === get_queried_object_id());
-              ?>
+          // 現在表示中のカテゴリIDと一致したら is-active クラスを付与
+          $is_active = (is_tax('voice_category') && $term->term_id === get_queried_object_id());
+          ?>
           <a class="tabs__item tab <?php if ($is_active) echo 'is-active'; ?>"
             href="<?php echo esc_url(get_term_link($term)); ?>">
             <?php echo esc_html($term->name); ?>
@@ -61,14 +60,14 @@
                     <div class="voice-card__info">
                       <div class="voice-card__details">
                         <?php
-                              $voice_character = get_field('voice_character');
-                              ?>
+                        $voice_character = get_field('voice_character');
+                        ?>
                         <p class="voice-card__character"><?php echo $voice_character; ?></p>
                         <?php
-                              $terms = get_the_terms(get_the_ID(), 'voice_category');
-                              if (!empty($terms) && !is_wp_error($terms)) :
-                                $term_name = esc_html($terms[0]->name);
-                              ?>
+                        $terms = get_the_terms(get_the_ID(), 'voice_category');
+                        if (!empty($terms) && !is_wp_error($terms)) :
+                          $term_name = esc_html($terms[0]->name);
+                        ?>
                         <p class="voice-card__category"><?php echo $term_name; ?></p>
                         <?php endif; ?>
                       </div>
@@ -106,6 +105,5 @@
         </div>
       </div>
   </section>
-</main>
 
 <?php get_footer(); ?>

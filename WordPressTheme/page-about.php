@@ -4,7 +4,7 @@ Template Name:私たちについて
 */
 get_header(); ?>
 
-<main>
+
   <section id="page-about-hero" class="page-about-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -13,7 +13,7 @@ get_header(); ?>
     </div>
   </section>
 
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <section id="page-about-main" class="page-about-main l-page-about-main">
     <div class="page-about-main__inner inner">
@@ -43,13 +43,13 @@ get_header(); ?>
         </div>
         <div class="page-about-main__gallery-container gallery-container">
           <?php
-          $gallery_images = SCF::get('gallery_images');
-          if (! empty($gallery_images)) :
-            foreach ($gallery_images as $item) :
-              if (! empty($item['gallery_image'])) :
-                $img_id = $item['gallery_image'];
-                $img_url = wp_get_attachment_image_src($item['gallery_image'], 'large');
-                $alt = get_post_meta( $img_id, '_wp_attachment_image_alt', true ); // 画像IDからalt取得
+            $gallery_images = SCF::get('gallery_images');
+            if (! empty($gallery_images)) :
+                foreach ($gallery_images as $item) :
+                    if (! empty($item['gallery_image'])) :
+                        $img_id = $item['gallery_image'];
+                        $img_url = wp_get_attachment_image_src($item['gallery_image'], 'large');
+                        $alt = get_post_meta( $img_id, '_wp_attachment_image_alt', true ); // 画像IDからalt取得
           ?>
           <div class="gallery-container__item">
             <img class="gallery-container__img js-modal-open" src="<?php echo esc_url($img_url[0]); ?>"
@@ -59,7 +59,7 @@ get_header(); ?>
               endif;
             endforeach;
           endif;
-          ?>
+        ?>
         </div>
 
 
@@ -73,7 +73,5 @@ get_header(); ?>
       </div>
     </div>
   </section>
-
-</main>
 
 <?php get_footer(); ?>

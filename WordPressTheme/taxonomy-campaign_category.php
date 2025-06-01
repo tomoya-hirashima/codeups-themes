@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 
-<main>
   <section id="page-campaign-hero" class="page-campaign-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -9,19 +8,17 @@
     </div>
   </section>
 
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <section id="page-campaign-main" class="page-campaign-main l-page-campaign-main">
     <div class="page-campaign-main__inner inner">
       <div class="page-campaign-main__container">
-
         <?php
         $taxonomy_slug = 'campaign_category';
         $terms = get_terms([
-          'taxonomy' => $taxonomy_slug,
-          'hide_empty' => false
+            'taxonomy' => $taxonomy_slug,
+            'hide_empty' => false
         ]);
-
         if (!empty($terms) && !is_wp_error($terms)) :
         ?>
         <div class="page-campaign-main__tab-group tabs">
@@ -46,8 +43,6 @@
         </div>
         <?php endif; ?>
 
-
-
         <div class="page-campaign-main__tab-contents tab-contents">
           <div class="tab-contents__item tab-content is-active" id="all">
             <div class="tab-content__container page-campaign-cards">
@@ -65,22 +60,21 @@
                 </figure>
                 <div class="campaign-card__body">
                   <?php
-                        $terms = get_the_terms(get_the_ID(), 'campaign_category');
-
-                        if (!empty($terms) && !is_wp_error($terms)) :
-                          $term_name = esc_html($terms[0]->name);
-                        ?>
-                  <h2 class="campaign-card__category"><?php echo $term_name; ?></h2>
+                  $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                  if (!empty($terms) && !is_wp_error($terms)) :
+                    $term_name = esc_html($terms[0]->name);
+                  ?>
+                    <h2 class="campaign-card__category"><?php echo $term_name; ?></h2>
                   <?php endif; ?>
 
                   <div class="campaign-card__wrapper">
                     <h3 class="campaign-card__title"><?php the_title(); ?></h3>
                     <div class="campaign-card__info">
                       <?php
-                            $normal_price = get_field('normal_price');
-                            $discount = get_field('discount');
-                            $period = get_field('period');
-                            ?>
+                      $normal_price = get_field('normal_price');
+                      $discount = get_field('discount');
+                      $period = get_field('period');
+                      ?>
                       <p class="campaign-card__content">
                         全部コミコミ(お一人様)
                       </p>
@@ -130,6 +124,5 @@
     </div>
   </section>
 
-</main>
 
 <?php get_footer(); ?>

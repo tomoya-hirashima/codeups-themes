@@ -4,8 +4,6 @@ Template Name:ダイビング情報
 */
 get_header(); ?>
 
-
-<main>
   <section id="page-info-hero" class="page-info-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -14,7 +12,7 @@ get_header(); ?>
     </div>
   </section>
 
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <section id="page-info-main" class="page-info-main l-page-info-main">
     <div class="page-info-main__inner inner">
@@ -71,10 +69,7 @@ get_header(); ?>
           </div>
         </div>
       </div>
-
     </div>
   </section>
-
-</main>
 
 <?php get_footer(); ?>

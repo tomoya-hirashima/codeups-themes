@@ -4,7 +4,6 @@ Template Name:sitemap
 */
 get_header(); ?>
 
-<main>
   <section id="page-sitemap-hero" class="page-sitemap-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -13,7 +12,7 @@ get_header(); ?>
     </div>
   </section>
 
-  <?php get_template_part('breadcrumb'); ?>
+  <?php get_template_part('parts/breadcrumb'); ?>
 
   <section id="page-sitemap-main" class="page-sitemap-main l-page-sitemap-main">
     <div class="page-sitemap-main__inner inner">
@@ -44,12 +43,12 @@ get_header(); ?>
             <li class="nav-group__item nav-group__item--main nav-group-item--black">
               <a href="<?php echo esc_url(home_url('/info/')); ?>">ダイビング情報</a>
             </li>
-            <li class="nav-group__item"><a
-                href="<?php echo esc_url(home_url('/info/')); ?>#info-tab-content1">ライセンス講習</a></li>
-            <li class="nav-group__item"><a
-                href="<?php echo esc_url(home_url('/info/')); ?>#info-tab-content3">体験ダイビング</a></li>
-            <li class="nav-group__item"> <a
-                href="<?php echo esc_url(home_url('/info/')); ?>#info-tab-content2">ファンダイビング</a></li>
+            <li class="nav-group__item">
+              <a href="<?php echo esc_url(home_url('/info/')); ?>#info-tab-content1">ライセンス講習</a></li>
+            <li class="nav-group__item">
+              <a href="<?php echo esc_url(home_url('/info/')); ?>#info-tab-content3">体験ダイビング</a></li>
+            <li class="nav-group__item">
+              <a href="<?php echo esc_url(home_url('/info/')); ?>#info-tab-content2">ファンダイビング</a></li>
             <li class="nav-group__item nav-group__item--main nav-group-item--black">
               <a href="<?php echo esc_url(home_url('/blog/')); ?>">ブログ</a>
             </li>
@@ -64,10 +63,14 @@ get_header(); ?>
             <li class="nav-group__item nav-group__item--main nav-group-item--black">
               <a href="<?php echo esc_url(home_url('/price/')); ?>">料金一覧</a>
             </li>
-            <li class="nav-group__item"><a href="<?php echo esc_url(home_url('/price/')); ?>#license">ライセンス講習</a></li>
-            <li class="nav-group__item"><a href="<?php echo esc_url(home_url('/price/')); ?>#trial-diving">体験ダイビング</a>
+            <li class="nav-group__item">
+              <a href="<?php echo esc_url(home_url('/price/')); ?>#license">ライセンス講習</a>
             </li>
-            <li class="nav-group__item"> <a href="<?php echo esc_url(home_url('/price/')); ?>#fun-diving">ファンダイビング</a>
+            <li class="nav-group__item">
+              <a href="<?php echo esc_url(home_url('/price/')); ?>#trial-diving">体験ダイビング</a>
+            </li>
+            <li class="nav-group__item">
+              <a href="<?php echo esc_url(home_url('/price/')); ?>#fun-diving">ファンダイビング</a>
             </li>
           </ul>
         </div>
@@ -91,10 +94,8 @@ get_header(); ?>
           </ul>
         </div>
       </div>
-
     </div>
   </section>
 
-</main>
 
 <?php get_footer(); ?>

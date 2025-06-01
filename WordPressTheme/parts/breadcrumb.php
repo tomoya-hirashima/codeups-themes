@@ -1,4 +1,4 @@
-<nav class="breadcrumbs l-breadcrumbs<?php if (is_404()) echo ' l-404'; ?>" aria-label="パンくずリスト">
+<nav class="breadcrumbs l-breadcrumbs<?php echo is_404() ? ' l-404' : ''; ?>" aria-label="パンくずリスト">
   <?php if (is_404()) : ?>
   <!-- 404ページの場合：innerなし、ul直 -->
   <ul class="breadcrumbs__items breadcrumbs__items--white">

@@ -1,20 +1,19 @@
 <?php get_header(); ?>
 
-<main>
-  <section id="page-voice-hero" class="page-voice-hero hero">
-    <div class="hero__inner">
-      <div class="hero__content">
-        <h1 class="hero__title">Voice</h1>
-      </div>
+<section id="page-voice-hero" class="page-voice-hero hero">
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1 class="hero__title">Voice</h1>
     </div>
-  </section>
+  </div>
+</section>
 
-  <?php get_template_part('breadcrumb'); ?>
+<?php get_template_part('parts/breadcrumb'); ?>
 
-  <section id="page-voice-main" class="page-voice-main l-page-voice-main">
-    <div class="page-voice-main__inner inner">
-      <div class="page-voice-main__container">
-        <?php
+<section id="page-voice-main" class="page-voice-main l-page-voice-main">
+  <div class="page-voice-main__inner inner">
+    <div class="page-voice-main__container">
+      <?php
         $taxonomy_slug = 'voice_category';
         $terms = get_terms([
           'taxonomy' => $taxonomy_slug,
@@ -23,85 +22,82 @@
         // タブリスト
         if (!empty($terms) && !is_wp_error($terms)) :
         ?>
-        <div class="page-voice-main__tab-group tabs">
-          <!-- 「ALL」リンク -->
-          <a class="tabs__item tab is-active" href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
-          </a>
-          <!-- 各カテゴリのリンク -->
-          <?php foreach ($terms as $term) : ?>
-          <a class="tabs__item tab" href="<?php echo esc_url(get_term_link($term)); ?>">
-            <?php echo esc_html($term->name); ?>
-          </a>
-          <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
+      <div class="page-voice-main__tab-group tabs">
+        <!-- 「ALL」リンク -->
+        <a class="tabs__item tab is-active" href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
+        </a>
+        <!-- 各カテゴリのリンク -->
+        <?php foreach ($terms as $term) : ?>
+        <a class="tabs__item tab" href="<?php echo esc_url(get_term_link($term)); ?>">
+          <?php echo esc_html($term->name); ?>
+        </a>
+        <?php endforeach; ?>
+      </div>
+      <?php endif; ?>
 
-        <!-- コンテンツ -->
-        <div class="page-voice-main__tab-contents tab-contents">
-          <div class="tab-contents__item tab-content js-tab-content is-active" id="all">
-            <ul class="tab-content__container voice-cards">
-              <?php if (have_posts()) : ?>
-              <?php while (have_posts()): the_post(); ?>
-              <?php $show = get_field('show');
+      <!-- コンテンツ -->
+      <div class="page-voice-main__tab-contents tab-contents">
+        <div class="tab-contents__item tab-content js-tab-content is-active" id="all">
+          <ul class="tab-content__container voice-cards">
+            <?php if (have_posts()) : ?>
+            <?php while (have_posts()): the_post(); ?>
+            <?php $show = get_field('show');
                   if ($show): ?>
-              <li class="voice-cards__item voice-card">
-                <div class="voice-card__wrapper">
-                  <div class="voice-card__header">
-                    <div class="voice-card__info">
-                      <div class="voice-card__details">
-                        <?php
+            <li class="voice-cards__item voice-card">
+              <div class="voice-card__wrapper">
+                <div class="voice-card__header">
+                  <div class="voice-card__info">
+                    <div class="voice-card__details">
+                      <?php
                           $voice_character = get_field('voice_character');
                         ?>
-                        <p class="voice-card__character"><?php echo $voice_character; ?></p>
-                        <?php
+                      <p class="voice-card__character"><?php echo $voice_character; ?></p>
+                      <?php
                         $terms = get_the_terms(get_the_ID(), 'voice_category');
                         if (!empty($terms) && !is_wp_error($terms)) :
                           $term_name = esc_html($terms[0]->name);
                         ?>
-                        <p class="voice-card__category"><?php echo $term_name; ?></p>
-                        <?php endif; ?>
-                      </div>
-                      <h2 class="voice-card__title">
-                        <?php the_title(); ?>
-                      </h2>
-                    </div>
-                    <figure class="voice-card__img img-animation">
-                      <?php if (has_post_thumbnail()): ?>
-                      <?php the_post_thumbnail('full'); ?>
-                      <?php else: ?>
-                      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                      <p class="voice-card__category"><?php echo $term_name; ?></p>
                       <?php endif; ?>
-                    </figure>
+                    </div>
+                    <h2 class="voice-card__title">
+                      <?php the_title(); ?>
+                    </h2>
                   </div>
-                  <p class="voice-card__text">
-                    <?php
-    $content = get_the_content();
-    $content = strip_tags( $content ); // HTMLタグだけ除去（改行コードは残す）
-    $trimmed_content = mb_substr( $content, 0, 171 ); // 60文字に制限
-    $trimmed_content .= (mb_strlen($content) > 171) ? '…' : ''; // 60文字超なら「…」追加
-    $trimmed_content = nl2br( $trimmed_content ); // 改行コード（\n）を <br> に変換
-    echo $trimmed_content;
-  ?>
-                  </p>
+                  <figure class="voice-card__img img-animation">
+                    <?php if (has_post_thumbnail()): ?>
+                    <?php the_post_thumbnail('full'); ?>
+                    <?php else: ?>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                    <?php endif; ?>
+                  </figure>
                 </div>
-              </li>
-              <?php endif; ?>
-              <?php endwhile; ?>
-              <?php endif; ?>
-            </ul>
-          </div>
-
-          <!-- ページネーション -->
-          <div class="page-campaign-main__pagination pagination">
-            <?php global $wp_query; ?>
-            <?php if (function_exists('wp_pagenavi')) : ?>
-            <?php wp_pagenavi(); ?>
+                <p class="voice-card__text">
+                  <?php
+                    $content = get_the_content();
+                    $content = strip_tags( $content ); // HTMLタグだけ除去（改行コードは残す）
+                    $content = nl2br( $content ); // 改行コード（\n）を <br> に変換
+                    echo $content;
+                  ?>
+                </p>
+              </div>
+            </li>
             <?php endif; ?>
-          </div>
-
+            <?php endwhile; ?>
+            <?php endif; ?>
+          </ul>
         </div>
+
+        <!-- ページネーション -->
+        <div class="page-campaign-main__pagination pagination">
+          <?php global $wp_query; ?>
+          <?php if (function_exists('wp_pagenavi')) : ?>
+          <?php wp_pagenavi(); ?>
+          <?php endif; ?>
+        </div>
+
       </div>
-  </section>
-</main>
+    </div>
+</section>
 
 <?php get_footer(); ?>
