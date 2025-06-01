@@ -115,7 +115,7 @@
 
 .wpcf7-form-control.wpcf7-textarea{
   height: 100%;
-  overflow: scroll;
+  resize: none;
 }
 
 /*スクロールバー非表示（Chrome・Safari・Edge）*/
