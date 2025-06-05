@@ -14,9 +14,28 @@
 
 .page-about-main__gallery{
   margin-top: rem(37);
+  position: relative;
 
   @include mq("md") {
     margin-top: rem(120);
+  }
+}
+
+.page-about-main__gallery::after {
+  display: none;
+
+  @include mq("md") {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    top: -5.5625rem;
+    right: calc(50% - min(47.5vw, 59.3%));
+    width: rem(301);
+    height: rem(138);
+    background-image: url(../images/common/contact-back.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 10;
   }
 }
 

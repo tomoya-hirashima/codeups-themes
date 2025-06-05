@@ -34,12 +34,14 @@ get_header(); ?>
               </tr>
             </thead>
             <tbody class="page-price-table__body">
-              <?php foreach ($license_courses as $item) : ?>
+              <?php foreach ($license_courses as $item) :
+                if (!empty($item['license_course']) && !empty($item['license_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['license_course']); ?></td>
                 <td class="page-price-table__price"><?php echo wp_kses_post($item['license_price']); ?></td>
               </tr>
-              <?php endforeach; ?>
+              <?php endif;
+              endforeach; ?>
             </tbody>
             <?php endif; ?>
           </table>
@@ -53,12 +55,14 @@ get_header(); ?>
               </tr>
             </thead>
             <tbody class="page-price-table__body">
-              <?php foreach ($trial_diving as $item) : ?>
+              <?php foreach ($trial_diving as $item) : 
+                if (!empty($item['trial_course']) && !empty($item['trial_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['trial_course']); ?></td>
                 <td class="page-price-table__price"><?php echo wp_kses_post($item['trial_price']); ?></td>
               </tr>
-              <?php endforeach; ?>
+              <?php endif;
+              endforeach; ?>
             </tbody>
             <?php endif; ?>
           </table>
@@ -72,12 +76,14 @@ get_header(); ?>
               </tr>
             </thead>
             <tbody class="page-price-table__body">
-              <?php foreach ($fun_diving as $item) : ?>
+              <?php foreach ($fun_diving as $item) : 
+                if (!empty($item['fun_course']) && !empty($item['fun_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['fun_course']); ?></td>
                 <td class="page-price-table__price"><?php echo wp_kses_post($item['fun_price']); ?></td>
               </tr>
-              <?php endforeach; ?>
+              <?php endif;
+              endforeach; ?>
             </tbody>
             <?php endif; ?>
           </table>
@@ -91,12 +97,14 @@ get_header(); ?>
               </tr>
             </thead>
             <tbody class="page-price-table__body">
-              <?php foreach ($special_diving as $item) : ?>
+              <?php foreach ($special_diving as $item) : 
+                if (!empty($item['special_course']) && !empty($item['special_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['special_course']); ?></td>
                 <td class="page-price-table__price"><?php echo wp_kses_post($item['special_price']); ?></td>
               </tr>
-              <?php endforeach; ?>
+              <?php endif;
+              endforeach; ?>
             </tbody>
             <?php endif; ?>
           </table>

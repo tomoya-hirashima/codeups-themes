@@ -297,3 +297,24 @@ function custom_dashboard_widget_display() {
 </div>
 <?php
 }
+
+// タイトルタグの自動出力を有効にする（SEO SIMPLE PACKが使う）
+add_theme_support( 'title-tag' );
+
+// SEO SIMPLE PACKが期待通りに動かない場合の代替
+add_filter( 'pre_get_document_title', function( $title ) {
+  if ( is_single() ) {
+      // 投稿ページの場合：投稿タイトル + サイト名
+      $title = single_post_title( '', false ) . ' | ブログ | CodeUps';
+  } elseif ( is_home() || is_archive() ) {
+      // アーカイブやブログ一覧
+      $title = 'ブログ | CodeUps';
+  } elseif ( is_page() ) {
+      // 固定ページ
+      $title = get_the_title() . ' | CodeUps';
+  } else {
+      // その他
+      $title = get_bloginfo( 'name' );
+  }
+  return $title;
+});

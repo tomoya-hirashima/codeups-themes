@@ -17,9 +17,13 @@
   flex: 1;
 }
 
+.page-blog-main__detail.blog-detail{
+  flex:1;
+}
+
 .page-blog-main__sidebar {
   width: 85.21%;
-  margin: auto;
+  margin:0 auto;
 
   @include mq("md") {
     width: rem(294);

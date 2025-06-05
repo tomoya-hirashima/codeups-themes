@@ -51,7 +51,7 @@
                 <?php if (has_post_thumbnail()): ?>
                 <?php the_post_thumbnail('full'); ?>
                 <?php else: ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
                 <?php endif; ?>
               </figure>
               <div class="campaign-card__body">

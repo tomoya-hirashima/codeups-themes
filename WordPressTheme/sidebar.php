@@ -1,5 +1,4 @@
-<aside>
-  <div class="page-blog-main__sidebar sidebar">
+  <div class="sidebar">
     <div class="sidebar__inner">
       <!-- 人気記事 -->
       <div class="sidebar__category sidebar-category">
@@ -29,7 +28,7 @@
                   <?php if (has_post_thumbnail()): ?>
                   <?php the_post_thumbnail('full'); ?>
                   <?php else: ?>
-                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
                   <?php endif; ?>
                 </div>
                 <div class="sidebar-blog-card__body">
@@ -72,7 +71,7 @@
               <?php if (has_post_thumbnail()): ?>
               <?php the_post_thumbnail('full'); ?>
               <?php else: ?>
-              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
               <?php endif; ?>
             </div>
             <div class="sidebar-voice-card__body">
@@ -126,7 +125,7 @@
                   <?php if (has_post_thumbnail()): ?>
                   <?php the_post_thumbnail('full'); ?>
                   <?php else: ?>
-                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
                   <?php endif; ?>
                 </figure>
                 <div class="sidebar-campaign-card__body">
@@ -228,4 +227,3 @@
 
     </div>
   </div>
-</aside>

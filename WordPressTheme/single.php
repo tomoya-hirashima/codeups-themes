@@ -34,6 +34,10 @@
             <!-- /* 投稿にアイキャッチ画像が有る場合の処理 */ -->
             <?php the_post_thumbnail(); ?>
             <?php endif; ?>
+
+
+
+            
           </figure>
 
           <!-- 本文(全文) -->
@@ -64,10 +68,10 @@
         </div>
         <?php endwhile; ?>
         <?php endif; ?>
-
-
         <!-- サイドバー -->
-        <?php get_template_part('parts/sidebar'); ?>
+        <aside class="page-blog-main__sidebar">
+          <?php get_sidebar(); ?>
+        </aside>
       </div>
     </div>
   </section>

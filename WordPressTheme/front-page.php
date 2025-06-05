@@ -67,7 +67,7 @@
                 <?php if (has_post_thumbnail()): ?>
                 <?php the_post_thumbnail('full'); ?>
                 <?php else: ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
                 <?php endif; ?>
               </figure>
               <div class="campaign-card__body">
@@ -198,7 +198,7 @@
               <?php if (has_post_thumbnail()): ?>
               <?php the_post_thumbnail('full'); ?>
               <?php else: ?>
-              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
               <?php endif; ?>
             </figure>
             <div class="blog-card__body">
@@ -271,7 +271,7 @@
                 <?php if (has_post_thumbnail()): ?>
                 <?php the_post_thumbnail('full'); ?>
                 <?php else: ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
                 <?php endif; ?>
               </figure>
             </div>
@@ -367,7 +367,8 @@
                 </tr>
               </thead>
               <tbody>
-                <?php foreach ($items as $item) : ?>
+                <?php foreach ($items as $item) : 
+                  if (!empty($item[$section['course']]) && !empty($item[$section['price']])) : ?>
                 <tr>
                   <td>
                     <?php echo wp_kses_post($item[$section['course']]); ?>
@@ -376,7 +377,8 @@
                     <?php echo wp_kses_post($item[$section['price']]); ?>
                   </td>
                 </tr>
-                <?php endforeach; ?>
+                <?php endif;
+                endforeach; ?>
               </tbody>
             </table>
             <?php endif;

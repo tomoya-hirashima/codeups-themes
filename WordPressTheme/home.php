@@ -21,7 +21,11 @@
                 <li class="blog-cards__item blog-card">
                   <a href="<?php the_permalink(); ?>">
                     <figure class="blog-card__img">
+                      <?php if (has_post_thumbnail()): ?>
                       <?php the_post_thumbnail('post-thumbnail', array('alt' => the_title_attribute('echo=0'))); ?>
+                      <?php else: ?>
+                      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
+                      <?php endif; ?>
                     </figure>
                     <div class="blog-card__body">
                       <p class="blog-card__date">
@@ -56,7 +60,9 @@
           </div>
         </div>
         <!-- サイドバー -->
-        <?php get_template_part('parts/sidebar'); ?>
+        <aside class="page-blog-main__sidebar">
+          <?php get_sidebar(); ?>
+        </aside>
       </div>
     </div>
   </div>

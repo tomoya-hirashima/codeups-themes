@@ -7,7 +7,7 @@
 </div>
 
 
-<?php if (!(is_404() || is_page('contact'))) : ?>
+<?php if (!(is_404() || is_page('contact') || is_page('thanks'))) : ?>
 <div id="contact" class="contact l-contact">
   <div class="contact__inner inner">
     <div class="contact__wrapper">

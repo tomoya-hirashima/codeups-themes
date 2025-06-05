@@ -67,7 +67,9 @@
           </div>
         </div>
         <!-- サイドバー -->
-        <?php get_template_part('parts/sidebar'); ?>
+        <aside class="page-blog-main__sidebar">
+            <?php get_sidebar(); ?>
+        </aside>
       </div>
     </div>
   </div>

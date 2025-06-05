@@ -592,10 +592,6 @@ a {
 	position: relative;
 }
 
-.page-about-contents__img-container::after {
-	display: none;
-}
-
 .page-about-contents__img1 {
 	width: 100%;
 }
@@ -644,6 +640,11 @@ a {
 
 .page-about-main__gallery {
 	margin-top: 2.3125rem;
+	position: relative;
+}
+
+.page-about-main__gallery::after {
+	display: none;
 }
 
 .page-about-main__gallery-container {
@@ -675,8 +676,12 @@ a {
 	flex: 1;
 }
 
+.page-blog-main__detail.blog-detail {
+	flex: 1;
+}
+
 .page-blog-main__sidebar {
-	margin: auto;
+	margin: 0 auto;
 	width: 85.21%;
 }
 
@@ -3992,20 +3997,6 @@ html {
 	margin-top: 5rem;
 }
 
-.page-about-contents__img-container::after {
-	background-image: url(../images/common/contact-back.png);
-	background-repeat: no-repeat;
-	background-size: cover;
-	bottom: -10.5625rem;
-	content: "";
-	display: inline-block;
-	height: 8.625rem;
-	position: absolute;
-	right: calc(50% - min(47.5vw, 59.3%));
-	width: 18.8125rem;
-	z-index: 10;
-}
-
 .page-about-contents__img1 {
 	padding-left: 19.1%;
 	padding-top: 7.6%;
@@ -4058,6 +4049,20 @@ html {
 
 .page-about-main__gallery {
 	margin-top: 7.5rem;
+}
+
+.page-about-main__gallery::after {
+	background-image: url(../images/common/contact-back.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	content: "";
+	display: inline-block;
+	height: 8.625rem;
+	position: absolute;
+	right: calc(50% - min(47.5vw, 59.3%));
+	top: -5.5625rem;
+	width: 18.8125rem;
+	z-index: 10;
 }
 
 .page-about-main__gallery-container {

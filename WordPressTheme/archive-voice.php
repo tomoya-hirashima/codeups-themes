@@ -68,17 +68,12 @@
                     <?php if (has_post_thumbnail()): ?>
                     <?php the_post_thumbnail('full'); ?>
                     <?php else: ?>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/noimage.png" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
                     <?php endif; ?>
                   </figure>
                 </div>
                 <p class="voice-card__text">
-                  <?php
-                    $content = get_the_content();
-                    $content = strip_tags( $content ); // HTMLタグだけ除去（改行コードは残す）
-                    $content = nl2br( $content ); // 改行コード（\n）を <br> に変換
-                    echo $content;
-                  ?>
+                  <?php echo nl2br(get_the_content()); ?>
                 </p>
               </div>
             </li>

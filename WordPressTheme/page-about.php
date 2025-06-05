@@ -4,7 +4,6 @@ Template Name:私たちについて
 */
 get_header(); ?>
 
-
   <section id="page-about-hero" class="page-about-hero hero">
     <div class="hero__inner">
       <div class="hero__content">
@@ -36,31 +35,38 @@ get_header(); ?>
         </p>
       </div>
 
-      <div class="page-about-main__gallery">
-        <div class="page-about-main__heading section-heading">
-          <p class="section-heading__main">Gallery</p>
-          <h3 class="section-heading__sub">フォト</h3>
+      <?php
+$gallery_images = SCF::get('gallery_images');
+
+// 画像がセットされている項目だけ抽出
+$valid_images = array_filter($gallery_images, function ($item) {
+    return !empty($item['gallery_image']);
+});
+
+// 画像付きの項目がある場合だけギャラリーを表示
+if (!empty($valid_images)) :
+?>
+  <div class="page-about-main__gallery">
+    <div class="page-about-main__heading section-heading">
+      <p class="section-heading__main">Gallery</p>
+      <h3 class="section-heading__sub">フォト</h3>
+    </div>
+    <div class="page-about-main__gallery-container gallery-container">
+      <?php foreach ($valid_images as $item) :
+        $img_id = $item['gallery_image'];
+        $img_url = wp_get_attachment_image_src($img_id, 'large');
+        $alt = get_post_meta($img_id, '_wp_attachment_image_alt', true); ?>
+
+        <div class="gallery-container__item">
+          <img class="gallery-container__img js-modal-open"
+               src="<?php echo esc_url($img_url[0]); ?>"
+               alt="<?php echo esc_attr($alt); ?>">
         </div>
-        <div class="page-about-main__gallery-container gallery-container">
-          <?php
-            $gallery_images = SCF::get('gallery_images');
-            if (! empty($gallery_images)) :
-                foreach ($gallery_images as $item) :
-                    if (! empty($item['gallery_image'])) :
-                        $img_id = $item['gallery_image'];
-                        $img_url = wp_get_attachment_image_src($item['gallery_image'], 'large');
-                        $alt = get_post_meta( $img_id, '_wp_attachment_image_alt', true ); // 画像IDからalt取得
-          ?>
-          <div class="gallery-container__item">
-            <img class="gallery-container__img js-modal-open" src="<?php echo esc_url($img_url[0]); ?>"
-              alt="<?php echo esc_attr( $alt ); ?>">
-          </div>
-          <?php
-              endif;
-            endforeach;
-          endif;
-        ?>
-        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+<?php endif; ?>
+
 
 
         <!-- モーダル -->
