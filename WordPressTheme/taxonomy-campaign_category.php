@@ -87,7 +87,7 @@
                       <div class="campaign-card__discount">
                         <?php echo $formatted_discount; ?>
                       </div>
-                    </div>。・
+                    </div>
                       <div class="campaign-card__extra">
                         <p class="campaign-card__description">
                           <?php the_content(); ?>
