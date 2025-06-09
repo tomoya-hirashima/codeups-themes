@@ -60,9 +60,11 @@
                     <div class="voice-card__info">
                       <div class="voice-card__details">
                         <?php
-                        $voice_character = get_field('voice_character');
+                          $voice_age = get_field('voice_age');
+                          $voice_gender = get_field('voice_gender');
+                          $voice_gender = $voice_gender ? '(' . $voice_gender . ')' : '';
                         ?>
-                        <p class="voice-card__character"><?php echo $voice_character; ?></p>
+                         <p class="voice-card__character"><?php echo $voice_age; ?><?php echo $voice_gender; ?></p>
                         <?php
                         $terms = get_the_terms(get_the_ID(), 'voice_category');
                         if (!empty($terms) && !is_wp_error($terms)) :

@@ -70,23 +70,64 @@
                       $normal_price = get_field('normal_price');
                       $discount = get_field('discount');
                       $period = get_field('period');
+                      // 価格の表示形式を整形
+                      // カンマを削除し、数値に変換してからnumber_formatを適用
+                      $formatted_normal_price = !empty($normal_price) ? '¥' . number_format((float)str_replace(',', '', $normal_price)) : '';
+                      $formatted_discount = !empty($discount) ? '¥' . number_format((float)str_replace(',', '', $discount)) : '';
                     ?>
                     <p class="campaign-card__content">
                       全部コミコミ(お一人様)
                     </p>
                     <div class="campaign-card__price campaign-card__price--wide">
-                      <del class="campaign-card__normal-price">&yen;<?php echo $normal_price; ?></del>
+                      <del class="campaign-card__normal-price"><?php echo $formatted_normal_price; ?></del>
                       <div class="campaign-card__discount">
-                        &yen;<?php echo $discount; ?>
+                        <?php echo $formatted_discount; ?>
                       </div>
                     </div>
                     <div class="campaign-card__extra">
                       <p class="campaign-card__description">
                         <?php the_content(); ?>
                       </p>
-                      <?php if ($period): ?>
-                      <p class="campaign-card__period"><?php echo $period; ?></p>
-                      <?php endif; ?>
+
+                     <?php
+                      $period = get_field('period'); // グループフィールド
+
+                      if ($period):
+                        $start_raw = $period['start_date'];
+                        $end_raw   = $period['end_date'];
+
+                        if ($start_raw && $end_raw):
+                          // 日付オブジェクトに変換
+                          $start = new DateTime($start_raw);
+                          $end   = new DateTime($end_raw);
+
+                          // 年・月・日を取得
+                          $start_year = $start->format('Y');
+                          $start_md   = $start->format('n月j日');
+                          $end_year   = $end->format('Y');
+                          $end_md     = $end->format('n月j日');
+
+                          // 出力ロジック
+                          echo '<p class="campaign-card__period">';
+                          if ($start_year === $end_year) {
+                            echo $start_year . '年' . $start_md . ' 〜 ' . $end_md;
+                          } else {
+                            echo $start_year . '年' . $start_md . ' 〜 ' . $end_year . '年' . $end_md;
+                          }
+                          echo '</p>';
+
+                        elseif ($start_raw):
+                          $start = new DateTime($start_raw);
+                          echo '<p class="campaign-card__period">' . $start->format('Y年n月j日') . ' 〜 </p>';
+
+                        elseif ($end_raw):
+                          $end = new DateTime($end_raw);
+                          echo '<p class="campaign-card__period">〜 ' . $end->format('Y年n月j日') . '</p>';
+                        endif;
+
+                      endif;
+                      ?>
+
                       <p class="campaign-card__reserve">
                         ご予約・お問い合わせはコチラ
                       </p>

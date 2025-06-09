@@ -279,24 +279,89 @@ add_action('admin_enqueue_scripts', 'load_custom_admin_styles');
 
 // ダッシュボードにコンテンツ更新のウィジェットを追加
 function add_custom_dashboard_widget() {
+  wp_add_dashboard_widget(
+    'image_dashboard_widget', // ウィジェットID
+    '画像変更',           // タイトル
+    'image_dashboard_widget_display' // 表示内容のコールバック関数
+  );
+
     wp_add_dashboard_widget(
-        'custom_dashboard_widget', // ウィジェットID
-        'コンテンツ追加・更新',           // タイトル
-        'custom_dashboard_widget_display' // 表示内容のコールバック関数
+      'custom_dashboard_widget', // ウィジェットID
+      'コンテンツ追加・更新',           // タイトル
+      'custom_dashboard_widget_display' // 表示内容のコールバック関数
     );
+
+    wp_add_dashboard_widget(
+      'page_dashboard_widget', // ウィジェットID
+      '固定ページ',           // タイトル
+      'page_dashboard_widget_display' // 表示内容のコールバック関数
+  );
+
 }
 add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
 
-// ウィジェットの中身を定義
+// 画像ウィジェットの中身を定義
+function image_dashboard_widget_display() {
+  ?>
+  <div class="custom-dashboard-box">
+    <a href="../wp-admin/post.php?post=12&action=edit" class="widget-button widget-button--yellow">
+      <p>トップページ画像<br>〜追加・編集〜</p>
+      <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/slider-icon.svg" alt="トップスライダー画像 編集"></div>
+    </a>
+    <a href="../wp-admin/post.php?post=16&action=edit" class="widget-button widget-button--yellow">
+      <p>ギャラリー画像<br>〜追加・編集〜</p>
+      <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/gallery-icon.svg" alt="ギャラリー  編集"></div>
+    </a>
+  </div>
+  <?php
+}
+
+// コンテンツウィジェットの中身を定義
 function custom_dashboard_widget_display() {
     ?>
 <div class="custom-dashboard-box">
-  <a href="../wp-admin/post-new.php" class="widget-button widget-button--blue">＋ブログ新規追加</a>
-  <a href="../wp-admin/edit.php?post_type=campaign" class="widget-button widget-button--green">キャンペーン一覧</a>
-  <a href="../wp-admin/post-new.php?post_type=voice" class="widget-button widget-button--purple">お客様の声 新規追加</a>
+  <a href="../wp-admin/edit.php" class="widget-button">
+    <p>ブログ記事一覧<br>〜追加・編集〜</p>
+    <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/blog-icon.svg" alt="ブログ記事 追加"></div>
+  </a>
+  <a href="../wp-admin/edit.php?post_type=voice" class="widget-button">
+    <p>お客様の声<br>〜追加・編集〜</p>
+    <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/voice-icon.svg" alt="お客様の声 追加"></div>
+  </a>
+  <a href="../wp-admin/edit.php?post_type=campaign" class="widget-button">
+    <p>キャンペーン一覧<br>〜追加・編集〜</p>
+    <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/campaign-icon.svg" alt="キャンペーン編集"></div>
+  </a>
+  <a href="../wp-admin/post.php?post=20&action=edit" class="widget-button">
+    <p>料金一覧<br>〜追加・編集〜</p>
+    <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/price-icon.svg" alt="料金 編集"></div>
+  </a>
+  <a href="../wp-admin/post.php?post=22&action=edit" class="widget-button">
+    <p>よくある質問<br>〜追加・編集〜</p>
+    <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/faq-icon.svg" alt="よくある質問 編集"></div>
+  </a>
+
 </div>
 <?php
 }
+
+// 固定ページウィジェットの中身を定義
+function page_dashboard_widget_display() {
+  ?>
+  <div class="custom-dashboard-box">
+    <a href="../wp-admin/post.php?post=318&action=edit" class="widget-button widget-button--gray">
+      <p>プライバシーポリシー<br>〜編集〜</p>
+      <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/privacy-icon.svg" alt="プライバシーポリシー編集"></div>
+    </a>
+    <a href="../wp-admin/post.php?post=321&action=edit" class="widget-button widget-button--gray">
+      <p>利用規約<br>〜編集〜</p>
+      <div class="widget-icon"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/terms-icon.svg" alt="利用規約編集"></div>
+    </a>
+  </div>
+  <?php
+}
+
+
 
 // タイトルタグの自動出力を有効にする（SEO SIMPLE PACKが使う）
 add_theme_support( 'title-tag' );
@@ -318,3 +383,73 @@ add_filter( 'pre_get_document_title', function( $title ) {
   }
   return $title;
 });
+
+
+// 管理者に限定して更新通知を表示させるようにする
+function update_message_admin_only() {
+  if(!current_user_can('administrator')) {	// 管理者ユーザー以外だった場合の処理を記述
+    remove_action('admin_notices', 'update_nag', 3);
+  }
+}
+add_action( 'admin_init', 'update_message_admin_only' );
+
+
+// 管理画面カスタム(料金一覧の数値入力を整数に限定)
+  function admin_custom_number_input_js() {
+    ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // 「license_price」の入力欄だけを対象に、かつ「SCFの繰り返しフィールド内」に限定
+        const inputs = document.querySelectorAll(
+           '.smart-custom-fields-field-group input[name$="_price]"]'
+        );
+        inputs.forEach(function (input) {
+          input.setAttribute('type', 'number');
+          input.setAttribute('min', '0');
+          input.setAttribute('step', '1');
+        });
+      });
+    </script>
+    <?php
+  }
+  add_action('admin_footer', 'admin_custom_number_input_js');
+
+
+/* ===========================
+ * 投稿一覧にアイキャッチ画像を右端に追加
+ * =========================== */
+
+// 投稿タイプごとのカラム追加（右端に画像）
+function add_thumbnail_column($columns) {
+  return array_merge($columns, ['thumbnail' => '画像']);
+}
+
+// 投稿タイプごとの画像表示
+function display_thumbnail_column($column_name, $post_id) {
+  if ($column_name === 'thumbnail') {
+      if (has_post_thumbnail($post_id)) {
+          echo get_the_post_thumbnail($post_id, [60, 60], ['style' => 'border-radius: 4px;']);
+      } else {
+          echo '画像なし';
+      }
+  }
+}
+
+// カラム追加の対象投稿タイプ
+$custom_post_types = ['post', 'campaign', 'voice'];
+
+foreach ($custom_post_types as $post_type) {
+  add_filter("manage_{$post_type}_posts_columns", 'add_thumbnail_column');
+  add_action("manage_{$post_type}_posts_custom_column", 'display_thumbnail_column', 10, 2);
+}
+
+// 管理画面CSSで右寄せ（共通）
+function admin_custom_thumbnail_css() {
+  echo '<style>
+      .column-thumbnail {
+          text-align: right;
+          padding-right: 10px;
+      }
+  </style>';
+}
+add_action('admin_head', 'admin_custom_thumbnail_css');

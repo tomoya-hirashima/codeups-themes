@@ -38,7 +38,13 @@ get_header(); ?>
                 if (!empty($item['license_course']) && !empty($item['license_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['license_course']); ?></td>
-                <td class="page-price-table__price"><?php echo wp_kses_post($item['license_price']); ?></td>
+                <td class="page-price-table__price">
+                  <?php
+                    // 数値として処理し、カンマ付きでフォーマット
+                    $price = (int) $item['license_price'];
+                    echo esc_html('¥' . number_format($price));
+                  ?>
+                </td>
               </tr>
               <?php endif;
               endforeach; ?>
@@ -59,7 +65,13 @@ get_header(); ?>
                 if (!empty($item['trial_course']) && !empty($item['trial_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['trial_course']); ?></td>
-                <td class="page-price-table__price"><?php echo wp_kses_post($item['trial_price']); ?></td>
+                <td class="page-price-table__price">
+                <?php
+                    // 数値として処理し、カンマ付きでフォーマット
+                    $price = (int) $item['trial_price'];
+                    echo esc_html('¥' . number_format($price));
+                  ?>
+                </td>
               </tr>
               <?php endif;
               endforeach; ?>
@@ -80,7 +92,13 @@ get_header(); ?>
                 if (!empty($item['fun_course']) && !empty($item['fun_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['fun_course']); ?></td>
-                <td class="page-price-table__price"><?php echo wp_kses_post($item['fun_price']); ?></td>
+                <td class="page-price-table__price">
+                <?php
+                    // 数値として処理し、カンマ付きでフォーマット
+                    $price = (int) $item['fun_price'];
+                    echo esc_html('¥' . number_format($price));
+                  ?>
+                </td>
               </tr>
               <?php endif;
               endforeach; ?>
@@ -97,11 +115,17 @@ get_header(); ?>
               </tr>
             </thead>
             <tbody class="page-price-table__body">
-              <?php foreach ($special_diving as $item) : 
+              <?php foreach ($special_diving as $item) :
                 if (!empty($item['special_course']) && !empty($item['special_price'])) : ?>
               <tr class="page-price-table__body-row">
                 <td class="page-price-table__course"><?php echo wp_kses_post($item['special_course']); ?></td>
-                <td class="page-price-table__price"><?php echo wp_kses_post($item['special_price']); ?></td>
+                <td class="page-price-table__price">
+                <?php
+                    // 数値として処理し、カンマ付きでフォーマット
+                    $price = (int) $item['special_price'];
+                    echo esc_html('¥' . number_format($price));
+                  ?>
+                </td>
               </tr>
               <?php endif;
               endforeach; ?>

@@ -1,33 +1,63 @@
 
 .custom-dashboard-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
 
 .widget-button {
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: 10px 20px;
-  color: #fff;
+  color:black;
   text-decoration: none;
   border-radius: 4px;
-  font-weight: bold;
+  font-weight: 600;
+  font-family:"Lato";
   text-align: center;
+  background-color:skyblue;
+  transition: 0.3s all;
 }
 
-.widget-button--blue {
-  background-color: #0073aa;
+.widget-button.widget-button--yellow{
+  background-color:gold;
 }
 
-.widget-button--green {
-  background-color: #46b450;
-}
-
-.widget-button--purple {
-  background-color: #826eb4;
+.widget-button.widget-button--gray{
+  background-color:lightgray;
 }
 
 .widget-button:hover {
   opacity: 0.8;
+}
+
+.widget-button p{
+ font-size: 14px;
+}
+
+.widget-icon{
+  width: 60%;
+  height: 60%;
+  margin-inline: auto;
+  margin-top: 10px;
+}
+
+.widget-icon img{
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  padding-bottom: 16px;
+}
+
+
+
+/* 料金一覧 */
+.smart-cf-field-type-text th{
+  color: red;
+}
+
+.smart-cf-field-type-text .instruction{
+  color: blue;
 }
