@@ -18,28 +18,25 @@ get_header(); ?>
   <div class="page-faq-main__inner inner">
     <div class="page-faq-main__container accordion js-accordion">
       <div class="accordion__container">
-        <?php
+      <?php
         $faq = SCF::get('faq');
         if (!empty($faq)) :
           foreach ($faq as $item) :
-            if (empty($item['question']) || empty($item['answer'])) :
-              continue;
-          endif;
-        ?>
-        <div class="accordion__item accordion-box js-accordion-box">
-          <div class="accordion-box__question js-accordion-box__question">
-            <h2 class="accordion-box__question-text"><?php echo esc_html($item['question']); ?></h2>
-          </div>
-          <div class="accordion-box__answer js-accordion-box__answer">
-            <p class="accordion-box__answer-text">
-              <?php echo nl2br(esc_html($item['answer'])); ?>
-            </p>
-          </div>
-        </div>
-        <?php
+            if (!empty($item['question']) && !empty($item['answer'])) : ?>
+              <div class="accordion__item accordion-box js-accordion-box">
+                <div class="accordion-box__question js-accordion-box__question">
+                  <h2 class="accordion-box__question-text"><?php echo esc_html($item['question']); ?></h2>
+                </div>
+                <div class="accordion-box__answer js-accordion-box__answer">
+                  <p class="accordion-box__answer-text">
+                    <?php echo nl2br(esc_html($item['answer'])); ?>
+                  </p>
+                </div>
+              </div>
+           <?php endif;
           endforeach;
         endif;
-        ?>
+      ?>
       </div>
     </div>
   </div>

@@ -28,7 +28,7 @@
                   <?php if (has_post_thumbnail()): ?>
                   <?php the_post_thumbnail('full'); ?>
                   <?php else: ?>
-                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
+                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="No Image">
                   <?php endif; ?>
                 </div>
                 <div class="sidebar-blog-card__body">
@@ -71,14 +71,18 @@
               <?php if (has_post_thumbnail()): ?>
               <?php the_post_thumbnail('full'); ?>
               <?php else: ?>
-              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="No Image">
               <?php endif; ?>
             </div>
             <div class="sidebar-voice-card__body">
               <?php
-                  $voice_character = get_field('voice_character');
-                  ?>
-              <p class="sidebar-voice-card__character"><?php echo $voice_character; ?></p>
+                $voice_age = get_field('voice_age');
+                $voice_gender = get_field('voice_gender');
+
+                $age = !empty($voice_age) ? $voice_age : '';
+                $gender = !empty($voice_gender) ? '(' . $voice_gender . ')' : '';
+              ?>
+              <p class="voice-card__character"><?php echo $age . $gender; ?></p>
               <p class="sidebar-voice-card__title">
                 <?php the_title(); ?>
               </p>
@@ -114,10 +118,12 @@
             <?php if ($campaign_query->have_posts()): ?>
             <?php while ($campaign_query->have_posts()) : $campaign_query->the_post(); ?>
             <?php
-                $normal_price = get_field('normal_price');
-                $discount = get_field('discount');
-                $period = get_field('period');
-                ?>
+              $show = get_field('show');
+              $normal_price = get_field('normal_price');
+              $discount = get_field('discount');
+
+              if ($show && !empty($normal_price) && !empty($discount)):
+            ?>
 
             <li class="sidebar-campaign-cards__item sidebar-campaign-card">
               <a href="<?php echo get_post_type_archive_link('campaign') . '#campaign-' . get_the_ID(); ?>">
@@ -125,7 +131,7 @@
                   <?php if (has_post_thumbnail()): ?>
                   <?php the_post_thumbnail('full'); ?>
                   <?php else: ?>
-                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
+                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="No Image">
                   <?php endif; ?>
                 </figure>
                 <div class="sidebar-campaign-card__body">
@@ -137,18 +143,16 @@
                       <p class="sidebar-campaign-card__content">
                         全部コミコミ(お一人様)
                       </p>
-                      <?php if ($normal_price && $discount): ?>
                       <div class="sidebar-campaign-card__price">
-                        <del
-                          class="sidebar-campaign-card__normal-price">&yen;<?php echo esc_html($normal_price); ?></del>
+                        <div class="sidebar-campaign-card__normal-price">&yen;<?php echo esc_html($normal_price); ?></div>
                         <div class="sidebar-campaign-card__discount">&yen;<?php echo esc_html($discount); ?></div>
                       </div>
-                      <?php endif; ?>
                     </div>
                   </div>
                 </div>
               </a>
             </li>
+            <?php endif; ?>
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
             <?php endif; ?>

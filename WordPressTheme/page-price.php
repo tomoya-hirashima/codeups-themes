@@ -19,119 +19,66 @@ get_header(); ?>
     <div class="page-price-main__inner inner">
       <div class="page-price-main__container">
         <?php
-          $license_courses = SCF::get('license_courses');
-          $trial_diving = SCF::get('trial_diving');
-          $fun_diving = SCF::get('fun_diving');
-          $special_diving = SCF::get('special_diving');
+          $price_sections = array(
+            array(
+              'field'  => 'license_courses',
+              'title'  => 'ライセンス講習',
+              'id'     => 'license',
+              'course' => 'license_course',
+              'price'  => 'license_price',
+            ),
+            array(
+              'field'  => 'trial_diving',
+              'title'  => '体験ダイビング',
+              'id'     => 'trial-diving',
+              'course' => 'trial_course',
+              'price'  => 'trial_price',
+            ),
+            array(
+              'field'  => 'fun_diving',
+              'title'  => 'ファンダイビング',
+              'id'     => 'fun-diving',
+              'course' => 'fun_course',
+              'price'  => 'fun_price',
+            ),
+            array(
+              'field'  => 'special_diving',
+              'title'  => 'スペシャルダイビング',
+              'id'     => 'special-diving',
+              'course' => 'special_course',
+              'price'  => 'special_price',
+            ),
+          );
         ?>
         <div class="page-price-main__items page-price-box">
-          <table class="page-price-box__item page-price-table" id="license">
-            <?php if (!empty($license_courses)) : ?>
-            <thead class="page-price-table__head">
-              <tr class="page-price-table__head-row">
-                <th class="page-price-table__head-text" colspan="2"><span>ライセンス講習</span></th>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody class="page-price-table__body">
-              <?php foreach ($license_courses as $item) :
-                if (!empty($item['license_course']) && !empty($item['license_price'])) : ?>
-              <tr class="page-price-table__body-row">
-                <td class="page-price-table__course"><?php echo wp_kses_post($item['license_course']); ?></td>
-                <td class="page-price-table__price">
-                  <?php
-                    // 数値として処理し、カンマ付きでフォーマット
-                    $price = (int) $item['license_price'];
-                    echo esc_html('¥' . number_format($price));
-                  ?>
-                </td>
-              </tr>
-              <?php endif;
-              endforeach; ?>
-            </tbody>
-            <?php endif; ?>
-          </table>
-
-          <table class="page-price-box__item page-price-table" id="trial-diving">
-            <?php if (!empty($trial_diving)) : ?>
-            <thead class="page-price-table__head">
-              <tr class="page-price-table__head-row">
-                <th class="page-price-table__head-text" colspan="2"><span>体験ダイビング</span></th>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody class="page-price-table__body">
-              <?php foreach ($trial_diving as $item) : 
-                if (!empty($item['trial_course']) && !empty($item['trial_price'])) : ?>
-              <tr class="page-price-table__body-row">
-                <td class="page-price-table__course"><?php echo wp_kses_post($item['trial_course']); ?></td>
-                <td class="page-price-table__price">
-                <?php
-                    // 数値として処理し、カンマ付きでフォーマット
-                    $price = (int) $item['trial_price'];
-                    echo esc_html('¥' . number_format($price));
-                  ?>
-                </td>
-              </tr>
-              <?php endif;
-              endforeach; ?>
-            </tbody>
-            <?php endif; ?>
-          </table>
-
-          <table class="page-price-box__item page-price-table" id="fun-diving">
-            <?php if (!empty($fun_diving)) : ?>
-            <thead class="page-price-table__head">
-              <tr class="page-price-table__head-row">
-                <th class="page-price-table__head-text" colspan="2"><span>ファンダイビング</span></th>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody class="page-price-table__body">
-              <?php foreach ($fun_diving as $item) : 
-                if (!empty($item['fun_course']) && !empty($item['fun_price'])) : ?>
-              <tr class="page-price-table__body-row">
-                <td class="page-price-table__course"><?php echo wp_kses_post($item['fun_course']); ?></td>
-                <td class="page-price-table__price">
-                <?php
-                    // 数値として処理し、カンマ付きでフォーマット
-                    $price = (int) $item['fun_price'];
-                    echo esc_html('¥' . number_format($price));
-                  ?>
-                </td>
-              </tr>
-              <?php endif;
-              endforeach; ?>
-            </tbody>
-            <?php endif; ?>
-          </table>
-
-          <table class="page-price-box__item page-price-table">
-            <?php if (!empty($special_diving)) : ?>
-            <thead class="page-price-table__head">
-              <tr class="page-price-table__head-row">
-                <th class="page-price-table__head-text" colspan="2"><span>スペシャルダイビング</span></th>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody class="page-price-table__body">
-              <?php foreach ($special_diving as $item) :
-                if (!empty($item['special_course']) && !empty($item['special_price'])) : ?>
-              <tr class="page-price-table__body-row">
-                <td class="page-price-table__course"><?php echo wp_kses_post($item['special_course']); ?></td>
-                <td class="page-price-table__price">
-                <?php
-                    // 数値として処理し、カンマ付きでフォーマット
-                    $price = (int) $item['special_price'];
-                    echo esc_html('¥' . number_format($price));
-                  ?>
-                </td>
-              </tr>
-              <?php endif;
-              endforeach; ?>
-            </tbody>
-            <?php endif; ?>
-          </table>
+          <?php foreach ($price_sections as $section) :
+            $items = SCF::get($section['field']);
+            if (!empty($items)) : ?>
+            <table class="page-price-box__item page-price-table" id="<?php echo esc_attr($section['id']); ?>">
+              <thead class="page-price-table__head">
+                <tr class="page-price-table__head-row">
+                  <th class="page-price-table__head-text" colspan="2"><span><?php echo esc_html($section['title']); ?></span></th>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody class="page-price-table__body">
+                <?php foreach ($items as $item) :
+                  if (!empty($item[$section['course']]) && !empty($item[$section['price']])) : ?>
+                <tr class="page-price-table__body-row">
+                  <td class="page-price-table__course"><?php echo wp_kses_post($item[$section['course']]); ?></td>
+                  <td class="page-price-table__price">
+                    <?php
+                      $price = (int) $item[$section['price']];
+                      echo esc_html('¥' . number_format($price));
+                    ?>
+                  </td>
+                </tr>
+                <?php endif;
+                endforeach; ?>
+              </tbody>
+            </table>
+            <?php endif;
+          endforeach; ?>
         </div>
       </div>
     </div>

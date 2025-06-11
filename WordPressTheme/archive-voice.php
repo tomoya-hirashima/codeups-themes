@@ -49,12 +49,13 @@
                   <div class="voice-card__info">
                     <div class="voice-card__details">
                       <?php
-                          $voice_age = get_field('voice_age');
-                          $voice_age = $voice_age ? $voice_age . '代' : '';
-                          $voice_gender = get_field('voice_gender');
-                          $voice_gender = $voice_gender ? '(' . $voice_gender . ')' : '';
-                        ?>
-                      <p class="voice-card__character"><?php echo $voice_age; ?><?php echo $voice_gender; ?></p>
+                        $voice_age = get_field('voice_age');
+                        $voice_gender = get_field('voice_gender');
+
+                        $age = !empty($voice_age) ? $voice_age : '';
+                        $gender = !empty($voice_gender) ? '(' . $voice_gender . ')' : '';
+                      ?>
+                      <p class="voice-card__character"><?php echo $age . $gender; ?></p>
                       <?php
                         $terms = get_the_terms(get_the_ID(), 'voice_category');
                         if (!empty($terms) && !is_wp_error($terms)) :
@@ -76,12 +77,14 @@
                   </figure>
                 </div>
                 <p class="voice-card__text">
-                  <?php echo nl2br(get_the_content()); ?>
+                  <?php echo nl2br(str_replace(["\r\n", "\r", "\n"], '', get_the_content())); ?>
                 </p>
               </div>
             </li>
             <?php endif; ?>
             <?php endwhile; ?>
+            <?php else : ?>
+            <p>このカテゴリには投稿がありません。</p>
             <?php endif; ?>
           </ul>
         </div>

@@ -41,13 +41,10 @@
                       </p>
                       <h2 class="blog-card__title"><?php the_title(); ?></h2>
                       <div class="blog-card__text">
-                        <?php
-                          $content = get_the_content();
-                          $content = strip_tags($content, '<br>');
-                          $excerpt = mb_substr($content, 0, 89);
-                          echo nl2br($excerpt);
-                          $content = preg_replace('/^[\s\x{3000}]+|[\s\x{3000}]+$/u', '', $content);
-                        ?>
+                      <?php
+                        $content = get_the_content();
+                        echo mb_substr(nl2br(str_replace(["\r\n", "\r", "\n"], '', $content)), 0, 89) . (mb_strlen(strip_tags($content)) > 89 ? '...' : '');
+                      ?>
                       </div>
                     </div>
                   </a>
@@ -68,7 +65,7 @@
         </div>
         <!-- サイドバー -->
         <aside class="page-blog-main__sidebar">
-            <?php get_sidebar(); ?>
+          <?php get_sidebar(); ?>
         </aside>
       </div>
     </div>

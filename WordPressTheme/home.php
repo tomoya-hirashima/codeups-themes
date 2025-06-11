@@ -35,13 +35,14 @@
                       </p>
                       <h2 class="blog-card__title"><?php the_title(); ?></h2>
                       <div class="blog-card__text">
-                        <?php
-                          $content = get_the_content();
-                          $content = strip_tags($content, '<br>');
-                          $content = preg_replace('/^[\s\x{3000}]+|[\s\x{3000}]+$/u', '', $content);
-                          $excerpt = mb_substr($content, 0, 89);
-                          echo nl2br($excerpt);
-                        ?>
+                      <?php 
+                        $excerpt = get_the_excerpt();
+                        if (!empty($excerpt)) {
+                          echo mb_substr($excerpt, 0, 89) . '...';
+                        } else {
+                          echo '記事の内容がありません。';
+                        }
+                      ?>
                       </div>
                     </div>
                   </a>

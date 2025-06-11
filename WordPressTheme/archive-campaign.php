@@ -40,110 +40,117 @@
       <!-- コンテンツ -->
       <div class="page-campaign-main__tab-contents tab-contents">
         <div class="tab-contents__item tab-content is-active" data-content="all">
-          <div class="tab-content__container page-campaign-cards">
-            <?php if (have_posts()) : ?>
-            <?php while (have_posts()): the_post(); ?>
-            <?php $show = get_field('show');
-                  if ($show): ?>
-            <div class="page-campaign-cards__item campaign-card campaign-card--detailed"
-              id="campaign-<?php the_ID(); ?>">
-              <figure class="campaign-card__img">
-                <?php if (has_post_thumbnail()): ?>
-                <?php the_post_thumbnail('full'); ?>
-                <?php else: ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
-                <?php endif; ?>
-              </figure>
-              <div class="campaign-card__body">
-                <?php
+        <div class="tab-content__container page-campaign-cards">
+              <?php if (have_posts()) : ?>
+              <?php while (have_posts()): the_post(); ?>
+              <?php
+                $show = get_field('show');
+                $normal_price = get_field('normal_price');
+                $discount = get_field('discount');
+                $period = get_field('period');
+
+                // 有効期間のチェック
+                $is_valid_period = true;
+                if ($period && !empty($period['end_date'])) {
+                  $end = new DateTime($period['end_date']);
+                  $today = new DateTime();
+                  $is_valid_period = $end >= $today;
+                }
+
+                // 表示条件のチェック
+                if ($show && !empty($normal_price) && !empty($discount) && $is_valid_period):
+              ?>
+              <div class="page-campaign-cards__item campaign-card campaign-card--detailed">
+                <figure class="campaign-card__img">
+                  <?php if (has_post_thumbnail()): ?>
+                  <?php the_post_thumbnail('full'); ?>
+                  <?php else: ?>
+                  <img src="<?php echo get_template_directory_uri(); ?>/assets/images/common/no-image.png" alt="">
+                  <?php endif; ?>
+                </figure>
+                <div class="campaign-card__body">
+                  <?php
                   $terms = get_the_terms(get_the_ID(), 'campaign_category');
                   if (!empty($terms) && !is_wp_error($terms)) :
                     $term_name = esc_html($terms[0]->name);
-                ?>
-                <h2 class="campaign-card__category"><?php echo $term_name; ?></h2>
-                <?php endif; ?>
+                  ?>
+                    <h2 class="campaign-card__category"><?php echo $term_name; ?></h2>
+                  <?php endif; ?>
 
-                <div class="campaign-card__wrapper">
-                  <h3 class="campaign-card__title"><?php the_title(); ?></h3>
-                  <div class="campaign-card__info">
-                    <?php
-                      $normal_price = get_field('normal_price');
-                      $discount = get_field('discount');
-                      $period = get_field('period');
-                      // 価格の表示形式を整形
-                      // カンマを削除し、数値に変換してからnumber_formatを適用
-                      $formatted_normal_price = !empty($normal_price) ? '¥' . number_format((float)str_replace(',', '', $normal_price)) : '';
-                      $formatted_discount = !empty($discount) ? '¥' . number_format((float)str_replace(',', '', $discount)) : '';
-                    ?>
-                    <p class="campaign-card__content">
-                      全部コミコミ(お一人様)
-                    </p>
-                    <div class="campaign-card__price campaign-card__price--wide">
-                      <del class="campaign-card__normal-price"><?php echo $formatted_normal_price; ?></del>
-                      <div class="campaign-card__discount">
-                        <?php echo $formatted_discount; ?>
-                      </div>
-                    </div>
-                    <div class="campaign-card__extra">
-                      <p class="campaign-card__description">
-                        <?php the_content(); ?>
-                      </p>
-
-                     <?php
-                      $period = get_field('period'); // グループフィールド
-
-                      if ($period):
-                        $start_raw = $period['start_date'];
-                        $end_raw   = $period['end_date'];
-
-                        if ($start_raw && $end_raw):
-                          // 日付オブジェクトに変換
-                          $start = new DateTime($start_raw);
-                          $end   = new DateTime($end_raw);
-
-                          // 年・月・日を取得
-                          $start_year = $start->format('Y');
-                          $start_md   = $start->format('n月j日');
-                          $end_year   = $end->format('Y');
-                          $end_md     = $end->format('n月j日');
-
-                          // 出力ロジック
-                          echo '<p class="campaign-card__period">';
-                          if ($start_year === $end_year) {
-                            echo $start_year . '年' . $start_md . ' 〜 ' . $end_md;
-                          } else {
-                            echo $start_year . '年' . $start_md . ' 〜 ' . $end_year . '年' . $end_md;
-                          }
-                          echo '</p>';
-
-                        elseif ($start_raw):
-                          $start = new DateTime($start_raw);
-                          echo '<p class="campaign-card__period">' . $start->format('Y年n月j日') . ' 〜 </p>';
-
-                        elseif ($end_raw):
-                          $end = new DateTime($end_raw);
-                          echo '<p class="campaign-card__period">〜 ' . $end->format('Y年n月j日') . '</p>';
-                        endif;
-
-                      endif;
+                  <div class="campaign-card__wrapper">
+                    <h3 class="campaign-card__title"><?php the_title(); ?></h3>
+                    <div class="campaign-card__info">
+                      <?php
+                        // 価格の表示形式を整形
+                        $formatted_normal_price = '¥' . number_format((float)str_replace(',', '', $normal_price));
+                        $formatted_discount = '¥' . number_format((float)str_replace(',', '', $discount));
                       ?>
-
-                      <p class="campaign-card__reserve">
-                        ご予約・お問い合わせはコチラ
+                      <p class="campaign-card__content">
+                        全部コミコミ(お一人様)
                       </p>
-                      <div class="campaign-card__button">
-                        <a href="<?php echo esc_url(home_url('/contact/')); ?>"
-                          class="button"><span>contact&nbsp;us</span></a>
+                      <div class="campaign-card__price campaign-card__price--wide">
+                        <div class="campaign-card__normal-price"><?php echo $formatted_normal_price; ?></div>
+                        <div class="campaign-card__discount"><?php echo $formatted_discount; ?></div>
+                      </div>
+                      <div class="campaign-card__extra">
+                        <p class="campaign-card__description">
+                          <?php the_content(); ?>
+                        </p>
+
+                        <?php
+                        if ($period):
+                          $start_raw = $period['start_date'];
+                          $end_raw   = $period['end_date'];
+
+                          if ($start_raw && $end_raw):
+                            // 日付オブジェクトに変換
+                            $start = new DateTime($start_raw);
+                            $end   = new DateTime($end_raw);
+
+                            // 年・月・日を取得
+                            $start_year = $start->format('Y');
+                            $start_md   = $start->format('n/j');
+                            $end_year   = $end->format('Y');
+                            $end_md     = $end->format('n/j');
+
+                            // 出力ロジック
+                            echo '<p class="campaign-card__period">';
+                            if ($start_year === $end_year) {
+                              echo $start_year . '/' . $start_md . ' 〜 ' . $end_md;
+                            } else {
+                              echo $start_year . '/' . $start_md . ' 〜 ' . $end_year . '/' . $end_md;
+                            }
+                            echo '</p>';
+
+                          elseif ($start_raw):
+                            $start = new DateTime($start_raw);
+                            echo '<p class="campaign-card__period">' . $start->format('Y/n/j') . ' 〜 </p>';
+
+                          elseif ($end_raw):
+                            $end = new DateTime($end_raw);
+                            echo '<p class="campaign-card__period">〜 ' . $end->format('Y/n/j') . '</p>';
+                          endif;
+                        endif;
+                        ?>
+
+                        <p class="campaign-card__reserve">
+                          ご予約・お問い合わせはコチラ
+                        </p>
+                        <div class="campaign-card__button">
+                          <a href="<?php echo get_post_type_archive_link('contact'); ?>"
+                            class="button"><span>contact&nbsp;us</span></a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <?php endif; ?>
+              <?php endwhile; ?>
+              <?php else : ?>
+              <p>このカテゴリには投稿がありません。</p>
+              <?php endif; ?>
             </div>
-            <?php endif; ?>
-            <?php endwhile; ?>
-            <?php endif; ?>
-          </div>
         </div>
       </div>
 

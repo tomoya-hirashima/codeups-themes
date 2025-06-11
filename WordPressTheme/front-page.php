@@ -1,10 +1,10 @@
 <?php get_header(); ?>
 
+<?php
+ $sliders = SCF::get('slider-img');
+ if (!empty($sliders)) : ?>
 <section id="mv" class="mv">
   <div class="mv__inner">
-    <?php
-      $sliders = SCF::get('slider-img');
-      if (!empty($sliders)) : ?>
     <div class="mv__slider swiper js-swiper-mv">
       <div class="mv__swiper-wrapper swiper-wrapper">
         <?php foreach ($sliders as $slide) :
@@ -55,10 +55,12 @@
           <?php if ($top_campaign_query->have_posts()): ?>
           <?php while ($top_campaign_query->have_posts()) : $top_campaign_query->the_post(); ?>
           <?php
-                $normal_price = get_field('normal_price');
-                $discount = get_field('discount');
-                $period = get_field('period');
-                ?>
+            $show = get_field('show');
+            $normal_price = get_field('normal_price');
+            $discount = get_field('discount');
+
+            if ($show && !empty($normal_price) && !empty($discount)):
+          ?>
 
           <div class="campaign__slide swiper-slide">
             <a href="<?php echo get_post_type_archive_link('campaign') . '#campaign-' . get_the_ID(); ?>"
@@ -72,10 +74,10 @@
               </figure>
               <div class="campaign-card__body">
                 <?php
-                      $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                      if (!empty($terms) && !is_wp_error($terms)) :
-                        $term_name = esc_html($terms[0]->name);
-                      ?>
+                  $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                  if (!empty($terms) && !is_wp_error($terms)) :
+                    $term_name = esc_html($terms[0]->name);
+                ?>
                 <p class="campaign-card__category"><?php echo $term_name; ?></p>
                 <?php endif; ?>
                 <div class="campaign-card__wrapper">
@@ -84,17 +86,16 @@
                     <p class="campaign-card__content">
                       全部コミコミ(お一人様)
                     </p>
-                    <?php if ($normal_price && $discount): ?>
                     <div class="sidebar-campaign-card__price">
-                      <del class="sidebar-campaign-card__normal-price">&yen;<?php echo esc_html($normal_price); ?></del>
+                      <div class="sidebar-campaign-card__normal-price">&yen;<?php echo esc_html($normal_price); ?></div>
                       <div class="sidebar-campaign-card__discount">&yen;<?php echo esc_html($discount); ?></div>
                     </div>
-                    <?php endif; ?>
                   </div>
                 </div>
               </div>
             </a>
           </div>
+          <?php endif; ?>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
           <?php endif; ?>
@@ -207,13 +208,14 @@
               </time>
               <h3 class="blog-card__title"><?php the_title(); ?></h3>
               <p class="blog-card__text">
-                <?php
-                      $content = get_the_content();
-                      $content = strip_tags($content, '<br>');
-                      $content = preg_replace('/^[\s\x{3000}]+|[\s\x{3000}]+$/u', '', $content);
-                      $excerpt = mb_substr($content, 0, 89);
-                      echo nl2br($excerpt);
-                      ?>
+                <?php 
+                  $excerpt = get_the_excerpt();
+                  if (!empty($excerpt)) {
+                    echo mb_substr($excerpt, 0, 89) . '...';
+                  } else {
+                    echo '記事の内容がありません。';
+                  }
+                ?>
               </p>
             </div>
           </a>
@@ -354,35 +356,36 @@
 
           <table class="price__items price-box">
             <?php foreach ($price_sections as $section) :
-                    $items = SCF::get($section['field']);
-                    if (!empty($items)) : ?>
-            <table class="price-box__item price-table" id="<?php echo esc_attr($section['id']); ?>">
-              <colgroup>
-                <col class="price-table__col1" />
-                <col class="price-table__col2" />
-              </colgroup>
-              <thead>
-                <tr>
-                  <th colspan="2"><?php echo esc_html($section['title']); ?></th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($items as $item) : 
-                  if (!empty($item[$section['course']]) && !empty($item[$section['price']])) : ?>
-                <tr>
-                  <td>
-                    <?php echo wp_kses_post($item[$section['course']]); ?>
-                  </td>
-                  <td>
-                    <?php echo wp_kses_post($item[$section['price']]); ?>
-                  </td>
-                </tr>
-                <?php endif;
-                endforeach; ?>
-              </tbody>
-            </table>
-            <?php endif;
-                  endforeach; ?>
+              $items = SCF::get($section['field']);
+              if (!empty($items)) : ?>
+                <table class="price-box__item price-table" id="<?php echo esc_attr($section['id']); ?>">
+                  <colgroup>
+                    <col class="price-table__col1" />
+                    <col class="price-table__col2" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th colspan="2"><?php echo esc_html($section['title']); ?></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($items as $item) :
+                      if (!empty($item[$section['course']]) && !empty($item[$section['price']])) : ?>
+                    <tr>
+                      <td><?php echo wp_kses_post($item[$section['course']]); ?></td>
+                      <td>
+                        <?php
+                          $price = (int) $item[$section['price']];
+                          echo esc_html('¥' . number_format($price));
+                        ?>
+                      </td>
+                    </tr>
+                    <?php endif;
+                    endforeach; ?>
+                  </tbody>
+                </table>
+              <?php endif;
+              endforeach; ?>
           </table>
 
           <?php endwhile; ?>
