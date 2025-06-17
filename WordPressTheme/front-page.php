@@ -1,16 +1,15 @@
 <?php get_header(); ?>
 
-<?php
- $sliders = SCF::get('slider-img');
- if (!empty($sliders)) : ?>
 <section id="mv" class="mv">
   <div class="mv__inner">
     <div class="mv__slider swiper js-swiper-mv">
       <div class="mv__swiper-wrapper swiper-wrapper">
-        <?php foreach ($sliders as $slide) :
-              $slider_pc = wp_get_attachment_image_src($slide['slider_pc'], 'full');
-              $slider_sp = wp_get_attachment_image_src($slide['slider_sp'], 'full');
-            ?>
+        <?php
+        $sliders = SCF::get('slider-img');
+        foreach ($sliders as $slide) :
+          $slider_pc = wp_get_attachment_image_src($slide['slider_pc'], 'full');
+          $slider_sp = wp_get_attachment_image_src($slide['slider_sp'], 'full');
+        ?>
         <div class="mv__swiper-slide swiper-slide">
           <picture>
             <?php if ($slider_sp) : ?>
@@ -24,7 +23,6 @@
         <?php endforeach; ?>
       </div>
     </div>
-    <?php endif; ?>
     <div class="mv__content">
       <h2 class="mv__title">diving</h2>
       <p class="mv__text">into&nbsp;the&nbsp;ocean</p>
@@ -208,7 +206,7 @@
               </time>
               <h3 class="blog-card__title"><?php the_title(); ?></h3>
               <p class="blog-card__text">
-                <?php 
+                <?php
                   $excerpt = get_the_excerpt();
                   if (!empty($excerpt)) {
                     echo mb_substr($excerpt, 0, 89) . '...';
