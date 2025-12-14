@@ -358,33 +358,33 @@
             <?php foreach ($price_sections as $section) :
               $items = SCF::get($section['field']);
               if (!empty($items)) : ?>
-                <table class="price-box__item price-table" id="<?php echo esc_attr($section['id']); ?>">
-                  <colgroup>
-                    <col class="price-table__col1" />
-                    <col class="price-table__col2" />
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th colspan="2"><?php echo esc_html($section['title']); ?></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($items as $item) :
+            <table class="price-box__item price-table" id="<?php echo esc_attr($section['id']); ?>">
+              <colgroup>
+                <col class="price-table__col1" />
+                <col class="price-table__col2" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th colspan="2"><?php echo esc_html($section['title']); ?></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($items as $item) :
                       if (!empty($item[$section['course']]) && !empty($item[$section['price']])) : ?>
-                    <tr>
-                      <td><?php echo wp_kses_post($item[$section['course']]); ?></td>
-                      <td>
-                        <?php
+                <tr>
+                  <td><?php echo wp_kses_post($item[$section['course']]); ?></td>
+                  <td>
+                    <?php
                           $price = (int) $item[$section['price']];
                           echo esc_html('¥' . number_format($price));
                         ?>
-                      </td>
-                    </tr>
-                    <?php endif;
+                  </td>
+                </tr>
+                <?php endif;
                     endforeach; ?>
-                  </tbody>
-                </table>
-              <?php endif;
+              </tbody>
+            </table>
+            <?php endif;
               endforeach; ?>
           </table>
 
